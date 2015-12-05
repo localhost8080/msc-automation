@@ -1,14 +1,17 @@
 #!/bin/sh
 
-# simple bash script to get dvwa auth page using wget
+# simple bash script to get dvwa auth page using wget and save the cookie
 
 # get the login page to get the hidden field data
 wget --keep-session-cookies --save-cookies cookie.txt -O loginpage.html http://dvwa.dev/login.php
 # the actual user tolen is the 7th thing on this page
 user_token=`grep value < loginpage.html | grep user_token | tr '=' ' ' | awk '{print $7}' | sed s/\"//g | sed s/\'//g`
 rm loginpage.html
-
 # login into the page and save the cookies
 postdata="Login=Login&username=admin&password=password&user_token=${user_token}"
 
 wget -O /dev/null --load-cookie cookie.txt --keep-session-cookies --save-cookies cookie.txt --post-data ${postdata} http://dvwa.dev/login.php
+
+#make a nikto config with this cookie info in it
+session_id=`grep PHPSESSID < cookie.txt | awk '{print $7}'`
+echo 'STATIC-COOKIE="security"="low";"PHPSESSID"="'$session_id'"' > nikto.conf

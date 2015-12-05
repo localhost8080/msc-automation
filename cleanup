@@ -1,0 +1,4 @@
+#!/bin/sh
+#cleanup file
+rm cookie.txt
+rm nikto.conf
