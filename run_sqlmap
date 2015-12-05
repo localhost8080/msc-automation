@@ -5,3 +5,4 @@ cookie=$(cat cookie.txt)
 for url in $urllist; do
     sqlmap --load-cookies $cookie -u $url
 done
+rm cookie.txt
