@@ -1,7 +1,12 @@
 #!/bin/sh
 ./authenticate-dvwa
+
+#make a nikto config with this cookie info in it and some other nikto options
+session_id=`grep PHPSESSID < cookie.txt | awk '{print $7}'`
+echo -n 'STATIC-COOKIE="security"="low";"PHPSESSID"="'$session_id'"' > nikto.conf
+
 urllist=$(cat urllist.txt)
 for url in $urllist; do
-    nikto -useproxy http://127.0.0.1:8080/ -Tuning 9 -host $url
+    nikto -Plugins "" -useproxy http://127.0.0.1:8080/ -Tuning 9 -host $url
 done
 ./cleanup
