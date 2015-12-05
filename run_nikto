@@ -1,0 +1,12 @@
+#!/bin/sh
+./authenticate-dvwa
+urllist=${cat urllist.txt}
+
+
+user_token=`grep PHPSESSID < cookie.txt | grep user_token | tr '=' ' ' | awk '{print $7}' | sed s/\"//g | sed s/\'//g`
+
+
+for url in $urllist; do
+    nikto -useproxy http://127.0.0.1:8080/ -Tuning 9 -host $url
+done
+rm cookie.txt
