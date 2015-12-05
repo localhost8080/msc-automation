@@ -1,5 +1,5 @@
 #!/bin/sh
 ./authenticate-dvwa
 urllist=$(cat urllist.txt)
-sqlmap -m urllist.txt --batch --proxy="http://127.0.0.1:8080" --load-cookies cookie.txt -u $url
+sqlmap -m urllist.txt --batch --proxy="http://127.0.0.1:8080" --load-cookies cookie.txt
 rm cookie.txt
