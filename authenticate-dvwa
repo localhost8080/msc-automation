@@ -9,6 +9,6 @@ user_token=`grep value < loginpage.html | grep user_token | tr '=' ' ' | awk '{p
 rm loginpage.html
 
 # login into the page and save the cookies
-postdata=username=admin'&'password=p@ssword'&'user_token=${user_token}
+postdata=username=admin'&'password=password'&'user_token=${user_token}
 
 wget -O /dev/null --keep-session-cookies --save-cookies cookie.txt --post-data ${postdata} http://dvwa.dev/login.php
