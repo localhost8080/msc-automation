@@ -1,6 +1,6 @@
 #!/bin/sh
 ./authenticate-dvwa
-urllist=${cat urllist.txt}
+urllist=$(cat urllist.txt)
 for url in $urllist; do
     nikto -useproxy http://127.0.0.1:8080/ -Tuning 9 -host $url
 done
