@@ -9,4 +9,5 @@ urllist=$(cat urllist.txt)
 for url in $urllist; do
     nikto -Plugins "" -useproxy http://127.0.0.1:8080/ -Tuning 9 -host $url
 done
+
 ./cleanup
