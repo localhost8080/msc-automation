@@ -11,8 +11,7 @@ session_id=`grep PHPSESSID < cookie.txt | awk '{print $7}'`
 urllist=$(cat urllist.txt)
 for url in $urllist; do
 
-    echo > bbqsql.conf
-    echo -n "[Request Config]\n" >> bbqsql.conf
+    echo -n "[Request Config]\n" > bbqsql.conf
     echo -n "url = $url\n" >> bbqsql.conf
     echo -n "method = POST\n" >> bbqsql.conf
     echo -n 'cookies = "security=low;PHPSESSID='$session_id'"\n' >> bbqsql.conf
