@@ -11,7 +11,7 @@ echo -n "profiles\n" >> w3af.script
 echo -n "use sqli\n" >> w3af.script
 echo -n "back\n" >> w3af.script
 echo -n "target\n" >> w3af.script
-echo -n "set target urllist.txt\n" >> w3af.script
+echo -n "set target file://urllist.txt\n" >> w3af.script
 echo -n "back\n" >> w3af.script
 echo -n "start\n" >> w3af.script
 echo -n "bug-report\n" >> w3af.script
@@ -20,7 +20,6 @@ echo -n "back\n" >> w3af.script
 echo -n "exit\n" >> w3af.script
 
 w3af_console -s w3af.script
-
 
 ./cleanup
 rm w3af.script
