@@ -12,11 +12,11 @@ urllist=$(cat urllist.txt)
 for url in $urllist; do
 
     echo > bbqsql.conf
-    echo -n "[Request Config]" >> bbqsql.conf
-    echo -n "url = $url" >> bbqsql.conf
-    echo -n "method = POST" >> bbqsql.conf
-    echo -n 'cookies = "security=low;PHPSESSID='$session_id'"' >> bqqsql.conf
-    echo -n 'proxies = {"http": "127.0.0.1:8080","https": "127.0.0.1:8080"}' >> bqqsql.conf
+    echo -n "[Request Config]\n" >> bbqsql.conf
+    echo -n "url = $url\n" >> bbqsql.conf
+    echo -n "method = POST\n" >> bbqsql.conf
+    echo -n 'cookies = "security=low;PHPSESSID='$session_id'"\n' >> bbqsql.conf
+    echo -n 'proxies = {"http": "127.0.0.1:8080","https": "127.0.0.1:8080"}\n' >> bbqsql.conf
     bbqsql -c bbqsql.conf
 
 done
