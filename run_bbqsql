@@ -1,11 +1,7 @@
 #!/bin/sh
 ./authenticate-dvwa
 
-
-
 #make a bbqsql config with this cookie info in it and some other options
-#
-
 
 session_id=`grep PHPSESSID < cookie.txt | awk '{print $7}'`
 urllist=$(cat urllist.txt)

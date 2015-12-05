@@ -2,31 +2,25 @@
 ./authenticate-dvwa
 
 #make a w3af script with this cookie info in it and some other options
-#
-
 
 session_id=`grep PHPSESSID < cookie.txt | awk '{print $7}'`
-urllist=$(cat urllist.txt)
-for url in $urllist; do
 
-    echo > w3af.script
+echo > w3af.script
 
-    echo -n "profiles" >> w3af.script
-    echo -n "use sqli" >> w3af.script
-    echo -n "back\n" >> w3af.script
-    echo -n "target\n" >> w3af.script
-    echo -n "set target $url\n" >> w3af.script
-    echo -n "back\n" >> w3af.script
-    echo -n "start\n" >> w3af.script
-    echo -n "bug-report\n" >> w3af.script
-    echo -n "details 0\n" >> w3af.script
-    echo -n "back\n" >> w3af.script
-    echo -n "exit\n" >> w3af.script
+echo -n "profiles" >> w3af.script
+echo -n "use sqli" >> w3af.script
+echo -n "back\n" >> w3af.script
+echo -n "target\n" >> w3af.script
+echo -n "set target urllist.txt\n" >> w3af.script
+echo -n "back\n" >> w3af.script
+echo -n "start\n" >> w3af.script
+echo -n "bug-report\n" >> w3af.script
+echo -n "details 0\n" >> w3af.script
+echo -n "back\n" >> w3af.script
+echo -n "exit\n" >> w3af.script
 
+w3af_console -s w3af.script
 
-    w3af_console -s w3af.script
-
-done
 
 ./cleanup
 rm w3af.script
