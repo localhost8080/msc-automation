@@ -11,3 +11,4 @@ for url in $urllist; do
 done
 
 ./cleanup
+rm nikto.conf

@@ -29,3 +29,4 @@ for url in $urllist; do
 done
 
 ./cleanup
+rm w3af.script
