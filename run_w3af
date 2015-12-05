@@ -11,7 +11,7 @@ echo -n "profiles\n" >> w3af.script
 echo -n "use sqli\n" >> w3af.script
 echo -n "back\n" >> w3af.script
 echo -n "target\n" >> w3af.script
-echo -n "set target file://urllist.txt\n" >> w3af.script
+echo -n "set target file://$(pwd)/urllist.txt\n" >> w3af.script
 echo -n "back\n" >> w3af.script
 echo -n "start\n" >> w3af.script
 echo -n "bug-report\n" >> w3af.script
