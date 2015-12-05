@@ -1,0 +1,7 @@
+#!/bin/sh
+./authenticate-dvwa
+urllist=$(cat urllist.txt)
+cookie=$(cat cookie.txt)
+for url in $urllist; do
+    sqlmap --load-cookies $cookie -u $url
+done

@@ -1,0 +1,2 @@
+http://dvwa.dev/vulnerabilities/sqli/
+http://dvwa.dev/vulnerabilities/sqli_blind/
