@@ -10,9 +10,20 @@ echo > w3af.script
 echo -n "profiles\n" >> w3af.script
 echo -n "use sqli\n" >> w3af.script
 echo -n "back\n" >> w3af.script
-echo -n "http-settings\n" >> w3af.script
-echo -n "set cookie_jar_file file://$(pwd)/cookie.txt\n" >> w3af.script
+
+echo -n "auth detailed\n" >> w3af.script
+echo -n "auth config detailed\n" >> w3af.script
+echo -n "set username admin\n" >> w3af.script
+echo -n "set password password\n" >> w3af.script
+echo -n "set method POST\n" >> w3af.script
+echo -n "set auth_url http://dvwa.dev/login.php\n" >> w3af.script
+echo -n "set username_field user\n" >> w3af.script
+echo -n "set password_field pass\n" >> w3af.script
+echo -n "set check_url http://dvwa.dev/index.php\n" >> w3af.script
+echo -n "set check_string 'admin'\n" >> w3af.script
+echo -n "set data_format username=%U&password=%P&Login=Login\n" >> w3af.script
 echo -n "back\n" >> w3af.script
+
 echo -n "target\n" >> w3af.script
 echo -n "set target file://$(pwd)/urllist.txt\n" >> w3af.script
 echo -n "back\n" >> w3af.script
