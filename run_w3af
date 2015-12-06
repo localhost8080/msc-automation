@@ -7,9 +7,13 @@ session_id=`grep PHPSESSID < cookie.txt | awk '{print $7}'`
 
 echo > w3af.script
 
-echo -n "profiles\n" >> w3af.script
-echo -n "use sqli\n" >> w3af.script
-echo -n "back\n" >> w3af.script
+echo -n "plugins\n" >> w3af.script
+
+echo -n "audit sqli\n" >> w3af.script
+
+echo -n "audit blind_sqli\n" >> w3af.script
+echo -n "audit config blind_sqli\n" >> w3af.script
+echo -n "set eq_limit 0.89\n" >> w3af.script
 
 echo -n "auth detailed\n" >> w3af.script
 echo -n "auth config detailed\n" >> w3af.script
