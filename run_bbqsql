@@ -19,6 +19,7 @@ for url in $urllist; do
     echo -n "technique = binary_search\n" >> bbqsql.conf
     echo -n "comparison_attr = size\n" >> bbqsql.conf
     echo -n "concurrency = 30\n" >> bbqsql.conf
+    echo -n "csv_output_file = reports/bbqsql-output.csv\n" >> bbqsql.conf
 
     bbqsql -c bbqsql.conf
 
