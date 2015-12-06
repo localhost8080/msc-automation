@@ -32,6 +32,8 @@ echo -n "audit config blind_sqli\n" >> w3af.script
 echo -n "set eq_limit 0.89\n" >> w3af.script
 echo -n "back\n" >> w3af.script
 
+echo -n "back\n" >> w3af.script
+
 echo -n "start\n" >> w3af.script
 echo -n "bug-report\n" >> w3af.script
 echo -n "details 0\n" >> w3af.script
