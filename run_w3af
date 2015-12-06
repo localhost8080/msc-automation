@@ -28,6 +28,7 @@ echo -n "set check_url http://dvwa.dev/index.php\n" >> w3af.script
 echo -n "set check_string 'admin'\n" >> w3af.script
 echo -n "set data_format username=%U&password=%P&Login=Login\n" >> w3af.script
 echo -n "back\n" >> w3af.script
+echo -n "back\n" >> w3af.script
 
 echo -n "target\n" >> w3af.script
 echo -n "set target file://$(pwd)/urllist.txt\n" >> w3af.script
