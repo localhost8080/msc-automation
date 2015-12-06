@@ -14,15 +14,15 @@ echo -n "back\n" >> w3af.script
 
 echo -n "plugins\n" >> w3af.script
 echo -n "auth detailed\n" >> w3af.script
-echo -n "auth config detailed\n" >> w3af.script
+echo -n "auth config generic\n" >> w3af.script
 echo -n "set username admin\n" >> w3af.script
 echo -n "set password password\n" >> w3af.script
 echo -n "set method POST\n" >> w3af.script
 echo -n "set auth_url http://dvwa.dev/login.php\n" >> w3af.script
-echo -n "set username_field user\n" >> w3af.script
-echo -n "set password_field pass\n" >> w3af.script
+echo -n "set username_field username\n" >> w3af.script
+echo -n "set password_field password\n" >> w3af.script
 echo -n "set check_url http://dvwa.dev/index.php\n" >> w3af.script
-echo -n "set check_string 'admin'\n" >> w3af.script
+echo -n "set check_string admin\n" >> w3af.script
 echo -n "set data_format username=%U&password=%P&Login=Login\n" >> w3af.script
 echo -n "back\n" >> w3af.script
 
@@ -35,12 +35,10 @@ echo -n "back\n" >> w3af.script
 echo -n "back\n" >> w3af.script
 
 echo -n "start\n" >> w3af.script
-echo -n "bug-report\n" >> w3af.script
-echo -n "details 0\n" >> w3af.script
 echo -n "back\n" >> w3af.script
 echo -n "exit\n" >> w3af.script
 
 w3af_console -s w3af.script
 
 ./cleanup
-rm w3af.script
+#rm w3af.script
