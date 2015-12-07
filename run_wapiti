@@ -1,7 +1,11 @@
 #!/bin/sh
 ./authenticate-dvwa
+
+wapiti-getcookie cookie.json http://dvwa.dev/login.php
+
 urllist=$(cat urllist.txt)
 for url in $urllist; do
     wapiti -b page --proxy http://127.0.0.1:8080/ -s $url
 done
 ./cleanup
+rm cookie.json
