@@ -14,7 +14,7 @@ echo -n "back\n" >> w3af.script
 
 echo -n "plugins\n" >> w3af.script
 echo -n "auth detailed\n" >> w3af.script
-echo -n "auth config generic\n" >> w3af.script
+echo -n "auth config detailed\n" >> w3af.script
 echo -n "set username admin\n" >> w3af.script
 echo -n "set password password\n" >> w3af.script
 echo -n "set method POST\n" >> w3af.script
