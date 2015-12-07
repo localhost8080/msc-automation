@@ -5,7 +5,7 @@ wapiti-getcookie cookie.json http://dvwa.dev/login.php
 
 urllist=$(cat urllist.txt)
 for url in $urllist; do
-    wapiti $url -s $url -b page --proxy http://127.0.0.1:8080/ -o txt -o reports/wapiti.txt
+    wapiti $url -s $url -b page --proxy http://127.0.0.1:8080/ -o txt -o reports/wapiti.txt -m "-all,sql,blindsql"
 done
 ./cleanup
 rm cookie.json
