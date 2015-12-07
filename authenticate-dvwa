@@ -11,3 +11,6 @@ rm loginpage.html
 postdata="Login=Login&username=admin&password=password&user_token=${user_token}"
 
 wget -O /dev/null --load-cookie cookie.txt --keep-session-cookies --save-cookies cookie.txt --post-data ${postdata} http://dvwa.dev/login.php
+
+#get a wapiti cookie
+wapiti-getcookie cookie.json http://dvwa.dev/login.php
