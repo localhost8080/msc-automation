@@ -67,6 +67,12 @@ jc = jsoncookie.jsoncookie()
 jc.open(COOKIEFILE)
 jc.delete(server)
 
+
+cookieFilenameMozilla = "cookie.txt";
+cookieJarFileMozilla = cookielib.MozillaCookieJar(cookieFilenameMozilla);
+#will create (and save to) new cookie file
+cookieJarFileMozilla.save();
+
 current_full_url = url.split("#")[0]
 current = current_full_url.split("?")[0]
 currentdir = "/".join(current.split("/")[:-1]) + "/"
@@ -99,6 +105,7 @@ except HTMLParser.HTMLParseError, err:
         p.feed(htmlSource)
 
 jc.addcookies(session.cookies)
+cookieJarFileMozilla.save();
 
 if len(p.forms) == 0:
     print(_("No forms found in this page !"))
@@ -146,10 +153,8 @@ txheaders = {'User-agent': 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)',
 r = session.post(url, data=form[1], headers=txheaders, allow_redirects=True)
 
 jc.addcookies(session.cookies)
+cookieJarFileMozilla.save();
 jc.dump()
 jc.close()
 
 
-from cookielib import MozillaCookieJar
-nc = MozillaCookieJar('cookie.txt')
-nc.cookies.save()
