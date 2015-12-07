@@ -12,5 +12,8 @@ postdata="Login=Login&username=admin&password=password&user_token=${user_token}"
 
 wget -O /dev/null --load-cookie cookie.txt --keep-session-cookies --save-cookies cookie.txt --post-data ${postdata} http://dvwa.dev/login.php
 
+#alter the first line
+sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' cookie.txt
+
 #get a wapiti cookie
 wapiti-getcookie cookie.json http://dvwa.dev/login.php
