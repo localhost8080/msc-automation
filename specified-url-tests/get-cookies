@@ -72,9 +72,6 @@ jc = jsoncookie.jsoncookie()
 jc.open(COOKIEFILE)
 jc.delete(server)
 
-nc = MozillaCookieJar('cookiejar')
-
-
 current_full_url = url.split("#")[0]
 current = current_full_url.split("?")[0]
 currentdir = "/".join(current.split("/")[:-1]) + "/"
@@ -158,7 +155,7 @@ jc.addcookies(session.cookies)
 jc.dump()
 jc.close()
 
-
-nc.cookies.save(session.cookies)
+nc = MozillaCookieJar('cookie.txt')
+nc.cookies.save()
 
 
