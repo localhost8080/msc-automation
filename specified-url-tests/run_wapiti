@@ -2,7 +2,9 @@
 ./authenticate-dvwa
 urllist=$(cat urllist.txt)
 for url in $urllist; do
-    wapiti $url -s $url -b page --proxy http://127.0.0.1:8080/ -f txt -o reports/wapiti${url//[/:.]/_}.txt -m "-all,sql,blindsql"
+    fixed_url=$(echo $url | tr /.: _)
+    report_file="wapiti-$fixed_url.txt"
+    wapiti $url -s $url -b page --proxy http://127.0.0.1:8080/ -f txt -o reports/$report_file -m "-all,sql,blindsql"
 done
 ./cleanup
 
