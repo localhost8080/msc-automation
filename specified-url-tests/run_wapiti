@@ -1,15 +1,10 @@
-#!/usr/bin/python
-
-import os
-
+#!/bin/sh
 ./authenticate-dvwa
 
-urllist = open(filename).read()
+urllist = $(cat urllist.txt)
 
-for url in urllist:
+for url in $urllist:
     fixed_url=$(echo $url | tr /.: _)
     report_file="wapiti-$fixed_url.txt"
     wapiti $url -s $url -b page --proxy http://127.0.0.1:8080/ -f txt -o reports/$report_file -m "-all,sql,blindsql"
-
 ./cleanup
-
