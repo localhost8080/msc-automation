@@ -1,0 +1,20 @@
+{
+  ".dvwa.dev": {
+    "/": {
+      "security": {
+        "version": 0, 
+        "expires": null, 
+        "secure": false, 
+        "value": "low", 
+        "port": null
+      }, 
+      "PHPSESSID": {
+        "version": 0, 
+        "expires": null, 
+        "secure": false, 
+        "value": "k0n774d533pq2io6vcsko4f1p1", 
+        "port": null
+      }
+    }
+  }
+}
