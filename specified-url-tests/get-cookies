@@ -148,3 +148,8 @@ r = session.post(url, data=form[1], headers=txheaders, allow_redirects=True)
 jc.addcookies(session.cookies)
 jc.dump()
 jc.close()
+
+
+from cookielib import MozillaCookieJar
+nc = MozillaCookieJar('cookie.txt')
+nc.cookies.save()
