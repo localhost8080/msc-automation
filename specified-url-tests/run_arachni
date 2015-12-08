@@ -3,7 +3,7 @@
 
 urllist=$(cat urllist.txt)
 for url in $urllist; do
-    arachni --http-cookie-jar cookie.txt --scope-page-limit 1 $url
+    arachni --http-cookie-jar $(pwd)/cookie.txt --scope-page-limit 1 $url
 done
 
 ./cleanup
