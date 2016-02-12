@@ -16,4 +16,4 @@ wget -O /dev/null --load-cookie cookie.txt --keep-session-cookies --save-cookies
 sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' cookie.txt
 
 #get a wapiti cookie
-wapiti-getcookie cookie.json http://dvwa.dev/login.php
+#wapiti-getcookie cookie.json http://dvwa.dev/login.php
