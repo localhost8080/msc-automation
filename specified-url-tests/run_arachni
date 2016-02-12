@@ -4,12 +4,12 @@ import subprocess
 
 def main():
 	authenticate = subprocess.Popen("authenticate-dvwa", stdout=subprocess.PIPE)
-	
+
 	with open('urllist.txt') as urlfile:
 		for url in urlfile:
 			print url
-				scanner = subprocess.Popen(['arachni', '--http-cookie-jar', 'cookie.txt', '--scope-page-limit 1', _url], stdout=subprocess.PIPE)
-				output = scanner.stdout.readlines()
+			scanner = subprocess.Popen(['arachni', '--http-cookie-jar', 'cookie.txt', '--scope-page-limit 1', _url], stdout=subprocess.PIPE)
+			output = scanner.stdout.readlines()
 			if 'str' in url:
 				break
 
