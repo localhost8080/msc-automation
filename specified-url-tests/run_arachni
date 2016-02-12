@@ -1,10 +1,36 @@
-#!/bin/sh
-./authenticate-dvwa
+#!/usr/bin/env python
+import subprocess
 
-urllist=$(cat urllist.txt)
-for url in $urllist; do
-    arachni --http-cookie-jar $(pwd)/cookie.txt --scope-page-limit 1 $url
-done
 
-./cleanup
+def main():
+	authenticate = subprocess.Popen("authenticate-dvwa", stdout=subprocess.PIPE)
+
+	with open('urllist.txt') as urlfile:
+	   for url in urlfile:
+	       print url
+	       		scanner = subprocess.Popen(['arachni', '--http-cookie-jar', 'cookie.txt', '--scope-page-limit 1', _url], stdout=subprocess.PIPE)
+				output = scanner.stdout.readlines()
+	       if 'str' in url:
+	          break
+
+	cleanup = subprocess.Popen("cleanup", stdout=subprocess.PIPE)
+
+if __name__ == '__main__':
+	main()
+
+
+
+
+
+# older bash way
+#/bin/sh
+#./authenticate-dvwa
+
+#urllist=$(cat urllist.txt)
+#for url in $urllist; do
+#    arachni --http-cookie-jar $(pwd)/cookie.txt --scope-page-limit 1 $url
+#done
+
+#./cleanup
+
 
