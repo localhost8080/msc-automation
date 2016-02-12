@@ -12,7 +12,7 @@ def main():
 	with open(os.path.join(__location__,'urllist.txt')) as urlfile:
 		for url in urlfile:
 			print url
-			scanner = subprocess.Popen(['arachni', '--http-cookie-jar', 'cookie.txt', '--scope-page-limit 1', _url], stdout=subprocess.PIPE)
+			scanner = subprocess.Popen(['arachni', '--http-cookie-jar', 'cookie.txt', '--scope-page-limit','1', url], stdout=subprocess.PIPE)
 			output = scanner.stdout.readlines()
 			if 'str' in url:
 				break
