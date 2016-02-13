@@ -25,7 +25,6 @@ def main():
 	jsoncookiefile = os.path.join(__location__,'cookie.json')
 
 	# we cant cleanup after, due to the way subprocess forks, so we will do a cleanup before
-# we cant cleanup after, due to the way subprocess forks, so we will do a cleanup before
 	cleanup = subprocess.Popen(os.path.join(__location__,'cleanup'), shell=True)
 	cleanup.wait()
 	
@@ -39,7 +38,8 @@ def main():
 		for url in urlfile:
 			print url
 			url = url.rstrip('\r\n')
-			scanner = ['wapiti', url, '-s', url, '--scope', 'page', '--cookie', jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '-o', logfile, '--format', 'txt', '--module', '"-all,sql,blindsql"']
+			base_url = url[:url.find('?')]
+			scanner = ['wapiti', base_url, '-s', url, '--scope', 'page', '--cookie', jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '-o', logfile, '--format', 'txt', '--module', '"-all,sql,blindsql"']
 			test = runTest(scanner, logfile)
 
 if __name__ == '__main__':
