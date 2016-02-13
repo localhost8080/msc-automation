@@ -22,15 +22,15 @@ def main():
 	with open(logfile, "w") as log:
 		print >> log, "Scan results"
 
-	runTest(os.path.join(logfile, os.path.join(__location__,'authenticate-dvwa'))
+	authenticate = runTest(os.path.join(logfile, os.path.join(__location__,'authenticate-dvwa'))
 
 	with open(os.path.join(__location__,'urllist.txt')) as urlfile:
 		for url in urlfile:
 			print url
 			scanner = ['arachni', '--http-cookie-jar', os.path.join(__location__,'cookie.txt'), '--scope-page-limit','1', url]
-			runTest(scanner, logfile)
+			test = runTest(scanner, logfile)
 
-	runTest(os.path.join(logfile, os.path.join(__location__,'cleanup'))
+	cleanup = runTest(os.path.join(logfile, os.path.join(__location__,'cleanup'))
 
 if __name__ == '__main__':
 	main()
