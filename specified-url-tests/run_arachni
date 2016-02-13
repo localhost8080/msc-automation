@@ -9,7 +9,7 @@ def run(cmd, logfile):
     return p
 
 def runTest(scanner, logname):
-    with open(logname, "w") as log:
+    with open(logname, "a") as log:
         print >> log, "loading scanner: " + scanner
         a_ret = run(scanner, log)
 
@@ -17,8 +17,8 @@ def main():
 	__location__ = os.path.realpath(
 		os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
-	authenticate = subprocess.Popen(os.path.join(__location__,'authenticate-dvwa'), stdout=subprocess.PIPE)
-	
+	runTest(logname = os.path.join(__location__,'results/arachni.txt'), os.path.join(__location__,'authenticate-dvwa'))
+
 	with open(os.path.join(__location__,'urllist.txt')) as urlfile:
 		for url in urlfile:
 			print url
@@ -26,7 +26,8 @@ def main():
 			logname = os.path.join(__location__,'results/arachni.txt')
 			runTest(scanner, logname)
 
-	cleanup = subprocess.Popen(os.path.join(__location__,'cleanup'), stdout=subprocess.PIPE)
+	runTest(logname = os.path.join(__location__,'results/arachni.txt'), os.path.join(__location__,'cleanup'))
+
 
 if __name__ == '__main__':
 	main()
