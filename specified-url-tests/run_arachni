@@ -3,13 +3,6 @@ import sys
 import os
 import subprocess
 
-def main():
-	__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-
-	authenticate = subprocess.Popen(os.path.join(__location__,'authenticate-dvwa'), stdout=subprocess.PIPE)
-	loopUrl(__location__);
-	cleanup = subprocess.Popen(os.path.join(__location__,'cleanup'), stdout=subprocess.PIPE)
-
 def run(cmd, logfile):
     process = subprocess.Popen(cmd, shell=True, universal_newlines=True, stdout=logfile)
     process.wait()
@@ -26,6 +19,14 @@ def loopUrl(__location__, scanner):
 			print url
 			scanner = ['arachni', '--http-cookie-jar', os.path.join(__location__,'cookie.txt'), '--scope-page-limit','1', url]
 			logScan(scanner, os.path.join(__location__,'results/arachni.txt'))
+
+def main():
+	__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+
+	authenticate = subprocess.Popen(os.path.join(__location__,'authenticate-dvwa'), stdout=subprocess.PIPE)
+	loopUrl(__location__);
+	cleanup = subprocess.Popen(os.path.join(__location__,'cleanup'), stdout=subprocess.PIPE)
+
 
 if __name__ == '__main__':
 	main()
