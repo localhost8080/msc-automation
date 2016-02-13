@@ -20,7 +20,7 @@ def main():
 	logfile = os.path.join(__location__,'results/arachni.txt')
 
 	with open(logfile, "w") as log:
-        print >> log, "Scan results"
+		print >> log, "Scan results"
 
 	runTest(os.path.join(logfile, os.path.join(__location__,'authenticate-dvwa'))
 
