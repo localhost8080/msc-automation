@@ -17,11 +17,10 @@ def main():
 	__location__ = os.path.realpath(
 		os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
-	logfile = os.path.join(__location__,'results/arachni.txt')
+	logfile = os.path.join(__location__,'reports/arachni.txt')
 
-	fo = open(logfile, "w")
-	print "Scan Results", fo.name
-	fo.close()
+	with open(logfile, "w") as log:
+		print >> log, "Scan results"
 
 #	authenticate = runTest(os.path.join(logfile, os.path.join(__location__,'authenticate-dvwa'))
 
