@@ -17,16 +17,21 @@ def main():
 	__location__ = os.path.realpath(
 		os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
-	runTest(os.path.join(__location__,'results/arachni.txt'), os.path.join(__location__,'authenticate-dvwa'))
+	logfile = os.path.join(__location__,'results/arachni.txt')
+
+	with open(logfile, "w") as log:
+        print >> log, "Scan results"
+
+	runTest(os.path.join(logfile, os.path.join(__location__,'authenticate-dvwa'))
 
 	with open(os.path.join(__location__,'urllist.txt')) as urlfile:
 		for url in urlfile:
 			print url
 			scanner = ['arachni', '--http-cookie-jar', os.path.join(__location__,'cookie.txt'), '--scope-page-limit','1', url]
-			logname = os.path.join(__location__,'results/arachni.txt')
-			runTest(scanner, logname)
+			
+			runTest(scanner, logfile)
 
-	runTest(os.path.join(__location__,'results/arachni.txt'), os.path.join(__location__,'cleanup'))
+	runTest(os.path.join(logfile, os.path.join(__location__,'cleanup'))
 
 if __name__ == '__main__':
 	main()
