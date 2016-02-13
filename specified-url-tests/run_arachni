@@ -12,11 +12,10 @@ def main():
 		for url in urlfile:
 			print url
 			scanner = ['arachni', '--http-cookie-jar', os.path.join(__location__,'cookie.txt'), '--scope-page-limit','1', url]
-			logScan(scanner, os.path.join(__location__,'results/arachni.txt'))
-			with open(logfile, "a") as log:
-        		print >> log, "loading url: " + url + " scanner: " + scanner
-        		process = subprocess.Popen(cmd, shell=True, universal_newlines=True, stdout=logfile)
-    			process.wait()
+			with open(os.path.join(__location__,'results/arachni.txt'), "a") as log:
+				print >> log, "loading url: " + url + " scanner: " + scanner
+				process = subprocess.Popen(cmd, shell=True, universal_newlines=True, stdout=log)
+ 				process.wait()
 
 	cleanup = subprocess.Popen(os.path.join(__location__,'cleanup'), stdout=subprocess.PIPE)
 
