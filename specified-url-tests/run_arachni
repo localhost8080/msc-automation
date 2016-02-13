@@ -3,28 +3,21 @@ import sys
 import os
 import subprocess
 
-def run(cmd, logfile):
-    process = subprocess.Popen(cmd, shell=True, universal_newlines=True, stdout=logfile)
-    process.wait()
-    return process
+def main():
+	__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
-def logScan(scanner, logfile):
-    with open(logfile, "a") as log:
-        print >> log, "loading url: " + url + " scanner: " + scanner
-        result = run(scanner, log)
-
-def loopUrl(__location__, scanner):
+	authenticate = subprocess.Popen(os.path.join(__location__,'authenticate-dvwa'), stdout=subprocess.PIPE)
+	
 	with open(os.path.join(__location__,'urllist.txt')) as urlfile:
 		for url in urlfile:
 			print url
 			scanner = ['arachni', '--http-cookie-jar', os.path.join(__location__,'cookie.txt'), '--scope-page-limit','1', url]
 			logScan(scanner, os.path.join(__location__,'results/arachni.txt'))
+			with open(logfile, "a") as log:
+        		print >> log, "loading url: " + url + " scanner: " + scanner
+        		process = subprocess.Popen(cmd, shell=True, universal_newlines=True, stdout=logfile)
+    			process.wait()
 
-def main():
-	__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-
-	authenticate = subprocess.Popen(os.path.join(__location__,'authenticate-dvwa'), stdout=subprocess.PIPE)
-	loopUrl(__location__);
 	cleanup = subprocess.Popen(os.path.join(__location__,'cleanup'), stdout=subprocess.PIPE)
 
 
