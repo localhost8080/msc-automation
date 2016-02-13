@@ -22,11 +22,12 @@ def main():
 
 	cookiefile = os.path.join(__location__,'cookie.txt')
 
+	subprocess.Popen(os.path.join(__location__,'authenticate-dvwa'), shell=True)
 
 	with open(logfile, "w") as log:
 		print >> log, "Scan results"
 
-	authenticate = runTest(logfile, os.path.join(__location__,'authenticate-dvwa'))
+
 
 	with open(os.path.join(__location__,'urllist.txt'), "r") as urlfile:
 		for url in urlfile:
@@ -35,7 +36,7 @@ def main():
 			scanner = ' '.join(cmd)
 			test = runTest(scanner, logfile)
 
-	cleanup = runTest(logfile, os.path.join(__location__,'cleanup'))
+	subprocess.Popen(os.path.join(__location__,'cleanup'), shell=True)
 
 if __name__ == '__main__':
 	main()
