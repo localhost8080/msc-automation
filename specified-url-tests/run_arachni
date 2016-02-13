@@ -4,23 +4,29 @@ import os
 import subprocess
 
 def main():
-	__location__ = os.path.realpath(
-	    os.path.join(os.getcwd(), os.path.dirname(__file__)))
+	__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 	authenticate = subprocess.Popen(os.path.join(__location__,'authenticate-dvwa'), stdout=subprocess.PIPE)
+	scanner = ['arachni', '--http-cookie-jar', os.path.join(__location__,'cookie.txt'), '--scope-page-limit','1', url]
+	loopUrl(__location__, scanner);
+	cleanup = subprocess.Popen(os.path.join(__location__,'cleanup'), stdout=subprocess.PIPE)
 
+def run(cmd, logfile):
+    process = subprocess.Popen(cmd, shell=True, universal_newlines=True, stdout=logfile)
+    process.wait()
+    return process
+
+def logScan(scanner, logfile):
+    with open(logfile, "a") as log:
+        print >> log, "loading url: " + url + " scanner: " + scanner
+        result = run(scanner, log)
+
+def loopUrl(__location__):
 	with open(os.path.join(__location__,'urllist.txt')) as urlfile:
 		for url in urlfile:
 			print url
-			scanner = subprocess.Popen(['arachni', '--http-cookie-jar', os.path.join(__location__,'cookie.txt'), '--scope-page-limit','1', url], stdout=subprocess.PIPE)
-			output = scanner.stdout.readlines()
-			print output
-			with open(os.path.join(__location__,'arachni.txt'), "a") as resultfile:
-				resultfile.write(output)
-			if 'str' in url:
-				break
-
-	cleanup = subprocess.Popen(os.path.join(__location__,'cleanup'), stdout=subprocess.PIPE)
+			scanner = ['arachni', '--http-cookie-jar', os.path.join(__location__,'cookie.txt'), '--scope-page-limit','1', url]
+			logScan(scanner, os.path.join(__location__,'arachni.txt'))
 
 if __name__ == '__main__':
 	main()
