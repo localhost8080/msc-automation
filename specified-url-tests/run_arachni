@@ -27,8 +27,6 @@ def main():
 	with open(logfile, "w") as log:
 		print >> log, "Scan results"
 
-
-
 	with open(os.path.join(__location__,'urllist.txt'), "r") as urlfile:
 		for url in urlfile:
 			print url
