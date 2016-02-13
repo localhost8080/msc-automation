@@ -25,7 +25,7 @@ echo -n "back\n" >> w3af.script
 
 echo -n "output text_file\n" >> w3af.script
 echo -n "output config text_file\n" >> w3af.script
-echo -n "set output_file $(pwd)/reports/output-w3af.txt\n" >> w3af.script
+echo -n "set output_file $(pwd)/reports/w3af/w3af.txt\n" >> w3af.script
 echo -n "set verbose True\n" >> w3af.script
 
 echo -n "back\n" >> w3af.script
