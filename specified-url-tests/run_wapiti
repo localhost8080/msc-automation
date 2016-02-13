@@ -25,9 +25,12 @@ def main():
 	jsoncookiefile = os.path.join(__location__,'cookie.json')
 
 	# we cant cleanup after, due to the way subprocess forks, so we will do a cleanup before
-	subprocess.Popen(os.path.join(__location__,'cleanup'), shell=True)
+# we cant cleanup after, due to the way subprocess forks, so we will do a cleanup before
+	cleanup = subprocess.Popen(os.path.join(__location__,'cleanup'), shell=True)
+	cleanup.wait()
 	
-	subprocess.Popen(os.path.join(__location__,'authenticate-dvwa'), shell=True)
+	authenticate = subprocess.Popen(os.path.join(__location__,'authenticate-dvwa'), shell=True)
+	authenticate.wait()
 
 	with open(logfile, "w") as log:
 		print >> log, "Scan results"
