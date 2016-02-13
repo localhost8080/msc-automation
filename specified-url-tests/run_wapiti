@@ -4,7 +4,7 @@ import os
 import subprocess
 
 def run(cmd, logfile):
-    p = subprocess.Popen(cmd, universal_newlines=True, stdout=logfile)
+    p = subprocess.Popen(cmd, shell=True, universal_newlines=True, stdout=logfile)
     p.wait()
     return p
 
@@ -40,7 +40,6 @@ def main():
 			print url
 			url = url.rstrip('\r\n')
 			cmd = ['wapiti', url, '-s', url, '--scope', 'page', '--cookie', jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '-o', logfile, '--format', 'txt', '--module', '"-all,sql,blindsql"']
-			scanner = ' '.join(cmd)
 			print scanner
 			test = runTest(scanner, logfile)
 

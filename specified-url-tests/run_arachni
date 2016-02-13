@@ -39,7 +39,6 @@ def main():
 			print url
 			url = url.rstrip('\r\n')
 			cmd = ['arachni', '--checks', 'sql_injection*', '--http-proxy', 'http://127.0.0.1:8080', '--output-only-positives', '--report-save-path', reports, '--http-cookie-jar', cookiefile, '--scope-page-limit','1', url]
-			scanner = ' '.join(cmd)
 			test = runTest(scanner, logfile)
 
 if __name__ == '__main__':
