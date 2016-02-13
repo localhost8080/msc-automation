@@ -10,7 +10,7 @@ def run(cmd, logfile):
 
 def runTest(scanner, logname):
     with open(logname, "a") as log:
-        print >> log, "loading scanner: " + ' '.join(scanner)
+        print >> log, "loading scanner: " + scanner
         a_ret = run(scanner, log)
 
 def main():
@@ -27,7 +27,8 @@ def main():
 	with open(os.path.join(__location__,'urllist.txt'), "r") as urlfile:
 		for url in urlfile:
 			print url
-			scanner = ['arachni', '--http-cookie-jar', os.path.join(__location__,'cookie.txt'), '--scope-page-limit','1', url]
+			cmd = ['arachni', '--http-cookie-jar', os.path.join(__location__,'cookie.txt'), '--scope-page-limit','1', url]
+			scanner = ' '.join(cmd)
 			test = runTest(scanner, logfile)
 
 #	cleanup = runTest(os.path.join(logfile, os.path.join(__location__,'cleanup'))
