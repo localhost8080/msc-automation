@@ -35,6 +35,7 @@ def main():
 			print url
 			cmd = ['wapiti', url ,'-s', url, '-b', 'page', '--proxy', 'http://127.0.0.1:8080', '-f', 'txt' '-m','"-all,sql,blindsql"']
 			scanner = ' '.join(cmd)
+			print scanner
 			test = runTest(scanner, logfile)
 
 if __name__ == '__main__':
