@@ -3,6 +3,16 @@ import sys
 import os
 import subprocess
 
+def run(cmd, logfile):
+    p = subprocess.Popen(cmd, shell=True, universal_newlines=True, stdout=logfile)
+    p.wait()
+    return p
+
+def runTest(scanner, logname):
+    with open(logname, "w") as log:
+        print >> log, "loading scanner: " + scanner
+        a_ret = run(scanner, log)
+
 def main():
 	__location__ = os.path.realpath(
 		os.path.join(os.getcwd(), os.path.dirname(__file__)))
@@ -12,14 +22,15 @@ def main():
 	with open(os.path.join(__location__,'urllist.txt')) as urlfile:
 		for url in urlfile:
 			print url
-#			scanner = ['arachni', '--http-cookie-jar', os.path.join(__location__,'cookie.txt'), '--scope-page-limit','1', url]
-#			with open(os.path.join(__location__,'results/arachni.txt'), "a") as log:
-#				print >> log, "loading url: " + url + " scanner: " + scanner
-#				process = subprocess.Popen(cmd, shell=True, universal_newlines=True, stdout=log)
-# 				process.wait()
+			scanner = ['arachni', '--http-cookie-jar', os.path.join(__location__,'cookie.txt'), '--scope-page-limit','1', url]
+			logname = os.path.join(__location__,'results/arachni.txt')
+			runTest(scanner, logname)
 
 	cleanup = subprocess.Popen(os.path.join(__location__,'cleanup'), stdout=subprocess.PIPE)
 
-
 if __name__ == '__main__':
 	main()
+
+
+
+	
