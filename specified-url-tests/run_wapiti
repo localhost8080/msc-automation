@@ -1,7 +1,7 @@
 #!/bin/sh
 ./authenticate-dvwa
 
-urllist = $(cat urllist.txt)
+urllist=$(cat urllist.txt)
 
 for url in $urllist:
     fixed_url=$(echo $url | tr /.: _)
