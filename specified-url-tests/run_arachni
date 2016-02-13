@@ -4,7 +4,8 @@ import os
 import subprocess
 
 def main():
-	__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+	__location__ = os.path.realpath(
+		os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 	authenticate = subprocess.Popen(os.path.join(__location__,'authenticate-dvwa'), stdout=subprocess.PIPE)
 	
