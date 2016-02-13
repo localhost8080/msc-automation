@@ -1,4 +1,4 @@
 #!/bin/sh
 ./authenticate-dvwa
-sqlmap --output-dir reports -m urllist.txt --batch --proxy="http://127.0.0.1:8080" --load-cookies cookie.txt
+sqlmap --output-dir reports/sqlmap -m urllist.txt --batch --proxy="http://127.0.0.1:8080" --load-cookies cookie.txt
 ./cleanup
