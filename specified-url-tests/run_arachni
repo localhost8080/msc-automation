@@ -15,7 +15,7 @@ def main():
 			scanner = subprocess.Popen(['arachni', '--http-cookie-jar', os.path.join(__location__,'cookie.txt'), '--scope-page-limit','1', url], stdout=subprocess.PIPE)
 			output = scanner.stdout.readlines()
 			with open(os.path.join(__location__,'arachni.txt'), "a") as resultfile:
-    			resultfile.write(output)
+				resultfile.write(output)
 			if 'str' in url:
 				break
 
