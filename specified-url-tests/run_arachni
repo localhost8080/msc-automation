@@ -4,7 +4,7 @@ import os
 import subprocess
 
 def run(cmd, logfile):
-    p = subprocess.Popen(cmd, shell=True, universal_newlines=True, stdout=logfile)
+    p = subprocess.Popen(cmd, universal_newlines=True, stdout=logfile)
     p.wait()
     return p
 
