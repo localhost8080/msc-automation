@@ -16,9 +16,9 @@ def runTest(scanner, logname):
 def main():
 	__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 	
-	reports = os.path.join(__location__, 'reports/arachni')
+	reports = os.path.join(__location__, 'reports/wapiti')
 
-	logfile = os.path.join(reports, 'arachni.txt')
+	logfile = os.path.join(reports, 'wapiti.txt')
 
 	cookiefile = os.path.join(__location__,'cookie.txt')
 
@@ -39,7 +39,7 @@ def main():
 		for url in urlfile:
 			print url
 			url = url.rstrip('\r\n')
-			cmd = ['wapiti', url, '-s', url,'--scope', 'page', '--cookie', jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '--format', 'txt', '--module', '"-all,sql,blindsql"']
+			cmd = ['wapiti', url, '-s', url, '--scope', 'page', '--cookie', jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '--format', 'txt', '--module', '"-all,sql,blindsql"']
 			scanner = ' '.join(cmd)
 			print scanner
 			test = runTest(scanner, logfile)
