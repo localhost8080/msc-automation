@@ -14,10 +14,14 @@ def runTest(scanner, logname):
         a_ret = run(scanner, log)
 
 def main():
-	__location__ = os.path.realpath(
-		os.path.join(os.getcwd(), os.path.dirname(__file__)))
+	__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+	
+	reports = os.path.join(__location__, 'reports')
 
-	logfile = os.path.join(__location__,'reports/arachni.txt')
+	logfile = os.path.join(reports, 'arachni.txt')
+
+	cookiefile = os.path.join(__location__,'cookie.txt')
+
 
 	with open(logfile, "w") as log:
 		print >> log, "Scan results"
@@ -27,7 +31,7 @@ def main():
 	with open(os.path.join(__location__,'urllist.txt'), "r") as urlfile:
 		for url in urlfile:
 			print url
-			cmd = ['arachni', '--http-cookie-jar', os.path.join(__location__,'cookie.txt'), '--scope-page-limit','1', url]
+			cmd = ['arachni', '--report-save-path', reports, '--http-cookie-jar', cookiefile, '--scope-page-limit','1', url]
 			scanner = ' '.join(cmd)
 			test = runTest(scanner, logfile)
 
