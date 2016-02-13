@@ -1,10 +1,46 @@
-#!/bin/sh
-./authenticate-dvwa
+#!/usr/bin/env python
+import sys
+import os
+import subprocess
 
-urllist=$(cat urllist.txt)
+def run(cmd, logfile):
+    p = subprocess.Popen(cmd, shell=True, universal_newlines=True, stdout=logfile)
+    p.wait()
+    return p
 
-for url in $urllist:
-    fixed_url=$(echo $url | tr /.: _)
-    report_file="wapiti-$fixed_url.txt"
-    wapiti $url -s $url -b page --proxy http://127.0.0.1:8080/ -f txt -o reports/$report_file -m "-all,sql,blindsql"
-./cleanup
+def runTest(scanner, logname):
+    with open(logname, "a") as log:
+        print >> log, "loading scanner: " + scanner
+        a_ret = run(scanner, log)
+
+def main():
+	__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+	
+	reports = os.path.join(__location__, 'reports/arachni')
+
+	logfile = os.path.join(reports, 'arachni.txt')
+
+	cookiefile = os.path.join(__location__,'cookie.txt')
+
+	# we cant cleanup after, due to the way subprocess forks, so we will do a cleanup before
+	subprocess.Popen(os.path.join(__location__,'cleanup'), shell=True)
+	
+	subprocess.Popen(os.path.join(__location__,'authenticate-dvwa'), shell=True)
+
+	with open(logfile, "w") as log:
+		print >> log, "Scan results"
+
+	with open(os.path.join(__location__,'urllist.txt'), "r") as urlfile:
+		for url in urlfile:
+			print url
+			cmd = ['wapiti', url ,'-s', url, '-b', 'page', '--proxy', 'http://127.0.0.1:8080', '-f', 'txt' '-m','"-all,sql,blindsql"']
+			scanner = ' '.join(cmd)
+			test = runTest(scanner, logfile)
+
+if __name__ == '__main__':
+	main()
+
+
+
+
+
