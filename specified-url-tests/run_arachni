@@ -22,6 +22,9 @@ def main():
 
 	cookiefile = os.path.join(__location__,'cookie.txt')
 
+	# we cant cleanup after, due to the way subprocess forks, so we will do a cleanup before
+	subprocess.Popen(os.path.join(__location__,'cleanup'), shell=True)
+	
 	subprocess.Popen(os.path.join(__location__,'authenticate-dvwa'), shell=True)
 
 	with open(logfile, "w") as log:
@@ -34,7 +37,7 @@ def main():
 			scanner = ' '.join(cmd)
 			test = runTest(scanner, logfile)
 
-	subprocess.Popen(os.path.join(__location__,'cleanup'), shell=True)
+	
 
 if __name__ == '__main__':
 	main()
