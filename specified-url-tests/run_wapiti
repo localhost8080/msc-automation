@@ -39,7 +39,8 @@ def main():
 			print url
 			url = url.rstrip('\r\n')
 			base_url = url[:url.find('?')]
-			scanner = ['wapiti', base_url, '-s', url, '--scope', 'page', '--cookie', jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '-o', logfile, '--format', 'txt', '--module', '"-all,sql,blindsql"']
+			cmd = ['wapiti', base_url, '-s', url, '--scope', 'page', '--cookie', jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '-o', logfile, '--format', 'txt', '--module', '"-all,sql,blindsql"']
+			scanner = ' '.join(cmd)
 			test = runTest(scanner, logfile)
 
 if __name__ == '__main__':
