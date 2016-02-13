@@ -7,8 +7,7 @@ def main():
 	__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 	authenticate = subprocess.Popen(os.path.join(__location__,'authenticate-dvwa'), stdout=subprocess.PIPE)
-	scanner = ['arachni', '--http-cookie-jar', os.path.join(__location__,'cookie.txt'), '--scope-page-limit','1', url]
-	loopUrl(__location__, scanner);
+	loopUrl(__location__);
 	cleanup = subprocess.Popen(os.path.join(__location__,'cleanup'), stdout=subprocess.PIPE)
 
 def run(cmd, logfile):
@@ -21,12 +20,12 @@ def logScan(scanner, logfile):
         print >> log, "loading url: " + url + " scanner: " + scanner
         result = run(scanner, log)
 
-def loopUrl(__location__):
+def loopUrl(__location__, scanner):
 	with open(os.path.join(__location__,'urllist.txt')) as urlfile:
 		for url in urlfile:
 			print url
 			scanner = ['arachni', '--http-cookie-jar', os.path.join(__location__,'cookie.txt'), '--scope-page-limit','1', url]
-			logScan(scanner, os.path.join(__location__,'arachni.txt'))
+			logScan(scanner, os.path.join(__location__,'results/arachni.txt'))
 
 if __name__ == '__main__':
 	main()
