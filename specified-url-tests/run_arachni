@@ -16,7 +16,7 @@ def runTest(scanner, logname):
 def main():
 	__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 	
-	reports = os.path.join(__location__, 'reports')
+	reports = os.path.join(__location__, 'reports/arachni')
 
 	logfile = os.path.join(reports, 'arachni.txt')
 
