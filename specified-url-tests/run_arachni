@@ -10,7 +10,7 @@ def run(cmd, logfile):
 
 def runTest(scanner, logname):
     with open(logname, "a") as log:
-        print >> log, "loading scanner: " + scanner
+        print >> log, "loading scanner: " + ' '.join(scanner)
         a_ret = run(scanner, log)
 
 def main():
