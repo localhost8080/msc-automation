@@ -38,7 +38,7 @@ class jonathans_scanner:
 
 	def begin(self, cmd):
 
-		self.authenticate
+		authenticated = self.authenticate()
 
 		with open(self.logfile, "w") as log:
 			print >> log, "Scan results"
