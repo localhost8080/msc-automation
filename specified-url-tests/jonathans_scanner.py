@@ -24,11 +24,11 @@ class jonathans_scanner:
 	    thread.wait()
 	    return thread
 
-	def logResult(self, scanner, logname):
+	def logResult(self, cmd, logname):
 	    with open(logname, "a") as log:
-	        print >> log, "loading scanner: " + scanner
-	        print scanner
-	        thread = runThread(scanner, log)
+	        print >> log, "loading scanner: " + cmd
+	        print cmd
+	        thread = runThread(cmd, log)
 
 	def launchZaproxy(self):
 		cmd = '/usr/share/zaproxy/zap.sh -daemon -newsession ' + self.reports
