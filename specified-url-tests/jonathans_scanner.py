@@ -20,7 +20,7 @@ class jonathans_scanner:
 		
 
 	def runThread(self, cmd, logfile):
-	    thread = subprocess.Popen(cmd, shell=False, universal_newlines=True, stdout=logfile)
+	    thread = subprocess.Popen(cmd, shell=True, universal_newlines=True, stdout=logfile)
 	    thread.wait()
 	    return thread
 
@@ -43,7 +43,6 @@ class jonathans_scanner:
 		authenticate.wait()
 
 	def begin(self, cmd):
-
 		with open(self.logfile, "w") as log:
 			print >> log, "Scan results"
 			self.runThread(cmd, log)
