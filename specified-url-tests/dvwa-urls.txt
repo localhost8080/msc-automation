@@ -1,0 +1,2 @@
+http://dvwa.dev/vulnerabilities/sqli/?id=1&Submit=Submit
+http://dvwa.dev/vulnerabilities/sqli_blind/?id=1&Submit=Submit
