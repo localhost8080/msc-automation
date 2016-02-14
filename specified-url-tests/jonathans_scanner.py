@@ -15,10 +15,9 @@ class jonathans_scanner:
 		self.cookiefile = os.path.join(self.pwd,'cookie.txt')
 		self.jsoncookiefile = os.path.join(self.pwd,'cookie.json')
 		self.urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'urllist.txt'))]
-		self.session_id =  open(os.path.join(self.pwd,'session.txt'))
 		self.authenticated = self.authenticate()
-		# self.launchZaproxy
-
+		self.session_id = open(os.path.join(self.pwd,'session.txt'))
+		self.launchZaproxy
 
 	def runThread(self, cmd, logfile):
 	    thread = subprocess.Popen(cmd, shell=False, universal_newlines=True, stdout=logfile)
@@ -32,10 +31,9 @@ class jonathans_scanner:
 	        thread = runThread(scanner, log)
 
 	def launchZaproxy(self):
-		cmd = 'zaproxy -daemon -newsession ' + self.reports
+		cmd = '/usr/share/zaproxy/zap.sh -daemon -newsession ' + self.reports
 		thread = subprocess.Popen(cmd, shell=False, universal_newlines=True)
 		
-
 	def authenticate(self):
 		# we cant cleanup after, due to the way subprocess forks, so we will do a cleanup before
 		cleanup = subprocess.Popen(os.path.join(self.pwd,'cleanup'), shell=False)
