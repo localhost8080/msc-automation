@@ -17,7 +17,7 @@ class jonathans_scanner:
 		self.urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'urllist.txt'))]
 
 
-	def runThread(cmd, logfile):
+	def runThread(self, cmd, logfile):
 	    thread = subprocess.Popen(cmd, shell=True, universal_newlines=True, stdout=logfile)
 	    thread.wait()
 	    return thread
