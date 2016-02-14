@@ -31,7 +31,7 @@ class jonathans_scanner:
 	        thread = runThread(cmd, log)
 
 	def launchZaproxy(self):
-		cmd = '/usr/share/zaproxy/zap.sh -daemon -newsession ' + self.reports
+		cmd = '/usr/share/zaproxy/zap.sh -daemon -dir ' + self.reports + ' -newsession ' + self.ultilty_name
 		thread = subprocess.Popen(cmd, shell=False, universal_newlines=True)
 		
 	def authenticate(self):
