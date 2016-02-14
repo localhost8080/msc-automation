@@ -1,14 +1,19 @@
-#!/bin/sh
-./authenticate-dvwa
+#!/usr/bin/env python
+import jonathans_scanner
 
-#make a nikto config with this cookie info in it and some other nikto options
-session_id=`grep PHPSESSID < cookie.txt | awk '{print $7}'`
-echo -n 'STATIC-COOKIE="security"="low";"PHPSESSID"="'$session_id'"' > nikto.conf
+def main():
 
-urllist=$(cat urllist.txt)
-for url in $urllist; do
-    nikto -Format txt -output $(pwd)/reports/nikto/ -Plugins "" -useproxy http://127.0.0.1:8080/ -Tuning 9 -host $url
-done
+	name = 'nikto'
 
-./cleanup
-rm nikto.conf
+	scanner = jonathans_scanner(name)
+
+	for url in scanner.urls:
+		print url
+		base_url = url[:url.find('?')]
+		
+		cmd = ['nikto', '-Format', 'txt', '-output', scanner.reports + 'nikto-' + url + '.txt', '-Plugins', '""', '-useproxy', 'http://127.0.0.1:8080/', '-Tuning', '9', '-host' ,url]
+		
+		test = scanner.begin(' '.join(cmd), name)
+
+if __name__ == '__main__':
+	main()

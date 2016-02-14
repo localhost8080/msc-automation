@@ -2,3 +2,5 @@
 #cleanup file
 rm cookie.txt
 rm cookie.json
+rm nikto.conf
+rm w3af.script

@@ -38,7 +38,7 @@ echo -n "exit\n" >> w3af.script
 w3af_console -s w3af.script
 
 ./cleanup
-rm w3af.script
+
 
 
 
@@ -82,4 +82,4 @@ echo -n "exit\n" >> w3af.script
 w3af_console -s w3af.script
 
 ./cleanup
-rm w3af.script
+

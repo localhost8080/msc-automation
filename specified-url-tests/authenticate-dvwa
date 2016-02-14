@@ -17,3 +17,10 @@ sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' cookie.txt
 
 #get a wapiti cookie
 wapiti-getcookie cookie.json http://dvwa.dev/login.php
+
+
+#nikto cookie thing
+#make a nikto config with this cookie info in it and some other nikto options
+session_id=`grep PHPSESSID < cookie.txt | awk '{print $7}'`
+echo -n 'STATIC-COOKIE="security"="low";"PHPSESSID"="'$session_id'"' > nikto.conf
+
