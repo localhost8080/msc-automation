@@ -46,7 +46,7 @@ class jonathans_scanner:
 
 	def begin(self, cmd):
 		with open(self.logfile, "w") as log:
-			zaproxy_instance = self.launchZaproxy
+			#zaproxy_instance = self.launchZaproxy
 			print >> log, "Scan results"
 			self.runThread(cmd, log)
 			#self.closeZaproxy(zaproxy_instance)
