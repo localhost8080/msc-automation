@@ -26,7 +26,7 @@ def main():
             print >> configfile, "concurrency = 30\n"
             print >> configfile, "csv_output_file = "+  scanner.reports +"/bbqsql-output.csv\n"
 
-        cmd = ['bbqsql', '-c', 'bbqsql.conf']
+        cmd = ['/usr/bin/bbqsql', '-c', 'bbqsql.conf']
         cmd = ' '.join(cmd)
 
         test = scanner.begin(cmd)

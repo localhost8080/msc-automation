@@ -11,7 +11,7 @@ def main():
 		print url
 		base_url = url[:url.find('?')]
 		
-		cmd = ['wapiti', base_url, '-s', base_url, '--scope', 'page', '--cookie', scanner.jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '-o', scanner.logfile, '--format', 'txt', '--module', '"-all,sql,blindsql"']
+		cmd = ['/usr/bin/wapiti', base_url, '-s', base_url, '--scope', 'page', '--cookie', scanner.jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '-o', scanner.logfile, '--format', 'txt', '--module', '"-all,sql,blindsql"']
 		cmd = ' '.join(cmd)
 		
 		test = scanner.begin(cmd)

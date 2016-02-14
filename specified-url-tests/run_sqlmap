@@ -11,7 +11,7 @@ def main():
 		print url
 		base_url = url[:url.find('?')]
 		
-		cmd = ['sqlmap', '--output-dir', scanner.reports, '-m', 'urllist.txt', '--batch', '--proxy="http://127.0.0.1:8080"', '--load-cookies', scanner.cookiefile]
+		cmd = ['/usr/bin/sqlmap', '--output-dir', scanner.reports, '-m', 'urllist.txt', '--batch', '--proxy="http://127.0.0.1:8080"', '--load-cookies', scanner.cookiefile]
 		cmd = ' '.join(cmd)
 
 		test = scanner.begin(cmd)
