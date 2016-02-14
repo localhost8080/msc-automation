@@ -16,10 +16,11 @@ class jonathans_scanner:
 		self.jsoncookiefile = os.path.join(self.pwd,'cookie.json')
 		self.urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'urllist.txt'))]
 		self.authenticated = self.authenticate()
+		# self.launchZaproxy
 
 
 	def runThread(self, cmd, logfile):
-	    thread = subprocess.Popen(cmd, shell=True, universal_newlines=True, stdout=logfile)
+	    thread = subprocess.Popen(cmd, shell=False, universal_newlines=True, stdout=logfile)
 	    thread.wait()
 	    return thread
 
@@ -29,12 +30,17 @@ class jonathans_scanner:
 	        print scanner
 	        thread = runThread(scanner, log)
 
+	def launchZaproxy(self):
+		cmd = 'zaproxy -daemon -newsession ' + self.reports
+		thread = subprocess.Popen(cmd, shell=False, universal_newlines=True)
+		
+
 	def authenticate(self):
 		# we cant cleanup after, due to the way subprocess forks, so we will do a cleanup before
-		cleanup = subprocess.Popen(os.path.join(self.pwd,'cleanup'), shell=True)
+		cleanup = subprocess.Popen(os.path.join(self.pwd,'cleanup'), shell=False)
 		cleanup.wait()
 		
-		authenticate = subprocess.Popen(os.path.join(self.pwd,'authenticate-dvwa'), shell=True)
+		authenticate = subprocess.Popen(os.path.join(self.pwd,'authenticate-dvwa'), shell=False)
 		authenticate.wait()
 
 	def begin(self, cmd):
