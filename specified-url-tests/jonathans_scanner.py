@@ -19,7 +19,7 @@ class jonathans_scanner:
 		self.session_id = open(os.path.join(self.pwd,'session.txt'))
 
 	def runThread(self, cmd, logfile):
-	    thread = subprocess.Popen("exec" + cmd, shell=True, universal_newlines=True, stdout=logfile)
+	    thread = subprocess.Popen("exec " + cmd, shell=True, universal_newlines=True, stdout=logfile)
 	    thread.wait()
 	    
 	def logResult(self, cmd, logname):
