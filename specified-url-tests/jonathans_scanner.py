@@ -30,7 +30,7 @@ class jonathans_scanner:
 
 	def launchZaproxy(self):
 		cmd = '/usr/share/zaproxy/zap.sh -daemon -dir ' + self.reports + ' -newsession ' + self.ultilty_name
-		zaproxy_instance = subprocess.Popen(cmd, shell=False, universal_newlines=True, preexec_fn=os.setsid)
+		zaproxy_instance = subprocess.Popen("exec " + cmd, shell=False, universal_newlines=True, preexec_fn=os.setsid)
 		return zaproxy_instance
 
 	def closeZaproxy(self, zaproxy_instance):
