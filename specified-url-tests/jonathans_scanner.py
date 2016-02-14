@@ -17,7 +17,7 @@ class jonathans_scanner:
 		self.urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'urllist.txt'))]
 		self.authenticated = self.authenticate()
 		self.session_id = open(os.path.join(self.pwd,'session.txt'))
-		self.launchZaproxy
+		
 
 	def runThread(self, cmd, logfile):
 	    thread = subprocess.Popen(cmd, shell=False, universal_newlines=True, stdout=logfile)
