@@ -31,10 +31,10 @@ class jonathans_scanner:
 	def launchZaproxy(self):
 		cmd = '/usr/share/zaproxy/zap.sh -daemon -dir ' + self.reports + ' -newsession ' + self.ultilty_name
 		zaproxy_instance = subprocess.Popen("exec " + cmd, shell=False, universal_newlines=True, preexec_fn=os.setsid)
-		return zaproxy_instance
+		return zaproxy_instance.pid
 
 	def closeZaproxy(self, zaproxy_instance):
-		os.killpg(os.getpgid(zaproxy_instance.pid), signal.SIGTERM)
+		os.killpg(os.getpgid(zaproxy_instance), signal.SIGTERM)
 		
 	def authenticate(self):
 		# we cant cleanup after, due to the way subprocess forks, so we will do a cleanup before
