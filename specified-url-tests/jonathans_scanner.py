@@ -49,7 +49,7 @@ class jonathans_scanner:
 			zaproxy_instance = self.launchZaproxy
 			print >> log, "Scan results"
 			self.runThread(cmd, log)
-			self.closeZaproxy(zaproxy_instance)
+			#self.closeZaproxy(zaproxy_instance)
 
 
 
