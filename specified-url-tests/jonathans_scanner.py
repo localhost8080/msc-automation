@@ -15,6 +15,7 @@ class jonathans_scanner:
 		self.cookiefile = os.path.join(self.pwd,'cookie.txt')
 		self.jsoncookiefile = os.path.join(self.pwd,'cookie.json')
 		self.urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'urllist.txt'))]
+		self.authenticated = self.authenticate()
 
 
 	def runThread(self, cmd, logfile):
@@ -37,8 +38,6 @@ class jonathans_scanner:
 		authenticate.wait()
 
 	def begin(self, cmd):
-
-		authenticated = self.authenticate()
 
 		with open(self.logfile, "w") as log:
 			print >> log, "Scan results"
