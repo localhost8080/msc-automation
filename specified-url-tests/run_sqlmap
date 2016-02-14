@@ -1,4 +1,20 @@
-#!/bin/sh
-./authenticate-dvwa
-sqlmap --output-dir reports/sqlmap -m urllist.txt --batch --proxy="http://127.0.0.1:8080" --load-cookies cookie.txt
-./cleanup
+#!/usr/bin/env python
+from jonathans_scanner import jonathans_scanner
+
+def main():
+
+	name = 'sqlmap'
+
+	scanner = jonathans_scanner(name)
+
+	for url in scanner.urls:
+		print url
+		base_url = url[:url.find('?')]
+		
+		cmd = ['sqlmap', '--output-dir', scanner.reports, '-m', 'urllist.txt', '--batch', '--proxy="http://127.0.0.1:8080"', '--load-cookies', scanner.cookiefile]
+		cmd = ' '.join(cmd)
+
+		test = scanner.begin(cmd)
+
+if __name__ == '__main__':
+	main()
