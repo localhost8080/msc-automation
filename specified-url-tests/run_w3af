@@ -13,7 +13,7 @@ echo -n "set target file://$(pwd)/dvwa-urls.txt\n" >> w3af.script
 echo -n "back\n" >> w3af.script
 
 echo -n "http-settings\n" >> w3af.script
-echo -n "set cookie_jar_file $(pwd)/cookie.txt\n" >> w3af.script
+echo -n "set cookie_jar_file file://$(pwd)/cookie.txt\n" >> w3af.script
 echo -n "back\n" >> w3af.script
 
 echo -n "plugins\n" >> w3af.script
@@ -53,7 +53,7 @@ echo > w3af.script
 
 
 echo -n "target\n" >> w3af.script
-echo -n "set target $(pwd)/wordpress1-5-urls.txt\n" >> w3af.script
+echo -n "set target file://$(pwd)/wordpress1-5-urls.txt\n" >> w3af.script
 echo -n "back\n" >> w3af.script
 
 echo -n "http-settings\n" >> w3af.script
