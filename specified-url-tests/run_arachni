@@ -12,8 +12,9 @@ def main():
 		base_url = url[:url.find('?')]
 		
 		cmd = ['arachni', '--checks', 'sql_injection*', '--http-proxy', 'http://127.0.0.1:8080', '--output-only-positives', '--report-save-path', scanner.reports, '--http-cookie-jar', scanner.cookiefile, '--scope-page-limit','1', url]
+		cmd = ' '.join(cmd)
 
-		test = scanner.begin(' '.join(cmd), name)
+		test = scanner.begin(cmd, name)
 
 if __name__ == '__main__':
 	main()
