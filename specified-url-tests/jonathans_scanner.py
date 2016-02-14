@@ -22,13 +22,13 @@ class jonathans_scanner:
 	    thread.wait()
 	    return thread
 
-	def logResult(scanner, logname):
+	def logResult(self, scanner, logname):
 	    with open(logname, "a") as log:
 	        print >> log, "loading scanner: " + scanner
 	        print scanner
 	        thread = runThread(scanner, log)
 
-	def authenticate():
+	def authenticate(self):
 		# we cant cleanup after, due to the way subprocess forks, so we will do a cleanup before
 		cleanup = subprocess.Popen(os.path.join(self.pwd,'cleanup'), shell=True)
 		cleanup.wait()
@@ -36,7 +36,7 @@ class jonathans_scanner:
 		authenticate = subprocess.Popen(os.path.join(self.pwd,'authenticate-dvwa'), shell=True)
 		authenticate.wait()
 
-	def begin(cmd):
+	def begin(self, cmd):
 
 		self.authenticate
 
