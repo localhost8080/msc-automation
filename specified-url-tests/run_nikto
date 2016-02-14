@@ -7,7 +7,7 @@ echo -n 'STATIC-COOKIE="security"="low";"PHPSESSID"="'$session_id'"' > nikto.con
 
 urllist=$(cat urllist.txt)
 for url in $urllist; do
-    nikto -Format txt -output $(pwd)/reports/nikto/nikto$url.txt -Plugins "" -useproxy http://127.0.0.1:8080/ -Tuning 9 -host $url
+    nikto -Format txt -output $(pwd)/reports/nikto/ -Plugins "" -useproxy http://127.0.0.1:8080/ -Tuning 9 -host $url
 done
 
 ./cleanup
