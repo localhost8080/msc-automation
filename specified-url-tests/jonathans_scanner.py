@@ -12,7 +12,6 @@ class jonathans_scanner:
 		self.pwd = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))	
 		self.reports_path = os.path.join(self.pwd, 'reports')
 		self.reports = os.path.join(self.reports_path, self.ultilty_name)
-		self.logfile = ''
 		self.cookiefile = os.path.join(self.pwd,'cookie.txt')
 		self.jsoncookiefile = os.path.join(self.pwd,'cookie.json')
 		self.urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'urllist.txt'))]
@@ -47,8 +46,8 @@ class jonathans_scanner:
 
 	def begin(self, cmd, base_url):
 		fixed_base_url = re.sub('^[A-Za-z0-9]', '_', base_url)
-		self.logfile = os.path.join(self.reports, fixed_base_url + '.txt')
-		with open(self.logfile, "w") as log:
+		logfile = os.path.join(self.reports, fixed_base_url + '.txt')
+		with open(logfile, "w") as log:
 			cmd = '/usr/share/zaproxy/zap.sh -daemon -dir ' + self.reports + ' -newsession ' + self.ultilty_name
 			zaproxy_instance = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, preexec_fn=os.setsid) 
 			print >> log, "Scan results"
