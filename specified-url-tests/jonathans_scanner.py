@@ -46,10 +46,11 @@ class jonathans_scanner:
 
 	def begin(self, cmd):
 		with open(self.logfile, "w") as log:
-			zaproxy_instance = self.launchZaproxy
+			cmd = '/usr/share/zaproxy/zap.sh -daemon -dir ' + self.reports + ' -newsession ' + self.ultilty_name
+			zaproxy_instance = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, preexec_fn=os.setsid) 
 			print >> log, "Scan results"
 			self.runThread(cmd, log)
-			self.closeZaproxy(zaproxy_instance)
+			os.killpg(os.getpgid(zaproxy_instance.pid), signal.SIGTERM)
 
 
 
