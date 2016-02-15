@@ -18,6 +18,8 @@ class jonathans_scanner:
 		self.authenticated = self.authenticate()
 		self.session_id = open(os.path.join(self.pwd,'session.txt'))
 		self.logfile = ''
+		self.base_url = ''
+		self.fixed_base_url = ''
 
 	def runThread(self, cmd, logfile):
 	    thread = subprocess.Popen("exec " + cmd, shell=True, universal_newlines=True, stdout=logfile)
@@ -45,9 +47,14 @@ class jonathans_scanner:
 		authenticate = subprocess.Popen(os.path.join(self.pwd,'authenticate-dvwa'), shell=False)
 		authenticate.wait()
 
+	def setUrls(self, url):
+		self.base_url = url[:url.find('?')]
+		self.fixed_base_url = re.sub('[^A-Za-z0-9]+', '_', self.base_url)
+		self.logfile = os.path.join(self.reports, self.fixed_base_url + '.txt')
+
 	def begin(self, cmd):
 		with open(self.logfile, "w") as log:
-			cmd = '/usr/share/zaproxy/zap.sh -daemon -dir ' + self.reports + ' -newsession ' + self.logfile + '.zaproxy'
+			cmd = '/usr/share/zaproxy/zap.sh -daemon -newsession ' + self.logfile + '.zaproxy'
 			zaproxy_instance = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, preexec_fn=os.setsid) 
 			print >> log, "Scan results"
 			self.runThread(cmd, log)
