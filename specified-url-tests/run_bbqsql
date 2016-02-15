@@ -10,6 +10,9 @@ def main():
     for url in scanner.urls:
         print url
         base_url = url[:url.find('?')]
+        fixed_base_url = re.sub('^[A-Za-z0-9]', '_', base_url)
+        scanner.logfile = os.path.join(scanner.reports, fixed_base_url + '.txt')
+        
         #bbqsql takes input from a config file, we'll generate it here
         with open('bbqsql.conf', "w") as configfile:
             print >> configfile, "[Request Config]\n" 
@@ -29,7 +32,7 @@ def main():
         cmd = ['/usr/bin/bbqsql', '-c', 'bbqsql.conf']
         cmd = ' '.join(cmd)
 
-        test = scanner.begin(cmd, base_url)
+        test = scanner.begin(cmd)
 
 if __name__ == '__main__':
     main()
