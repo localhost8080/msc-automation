@@ -24,6 +24,7 @@ class jonathans_scanner:
 		self.fixed_base_url = ''
 
 	def runThread(self, cmd, logfile):
+		print cmd
 	    thread = subprocess.Popen("exec " + cmd, shell=True, universal_newlines=True, stdout=logfile)
 	    thread.wait()
 	    
