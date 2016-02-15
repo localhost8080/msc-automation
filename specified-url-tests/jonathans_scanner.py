@@ -53,12 +53,12 @@ class jonathans_scanner:
 		self.logfile = os.path.join(self.reports, self.fixed_base_url + '.txt')
 
 	def begin(self, cmd):
+		cmd = '/usr/share/zaproxy/zap.sh -newsession ' + self.ultilty_name + '.zaproxy'
+		zaproxy_instance = subprocess.Popen(cmd, shell=True, preexec_fn=os.setsid) 
 		with open(self.logfile, "w") as log:
-			cmd = '/usr/share/zaproxy/zap.sh -newsession ' + self.ultilty_name + '.zaproxy'
-			zaproxy_instance = subprocess.Popen(cmd, shell=True, preexec_fn=os.setsid) 
 			print >> log, "Scan results"
 			self.runThread(cmd, log)
-			os.killpg(os.getpgid(zaproxy_instance.pid), signal.SIGTERM)
+		os.killpg(os.getpgid(zaproxy_instance.pid), signal.SIGTERM)
 
 
 
