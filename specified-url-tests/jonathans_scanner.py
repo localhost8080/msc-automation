@@ -4,6 +4,8 @@ import os
 import subprocess
 import signal
 import re
+from zapv2 import ZAPv2
+
 
 class jonathans_scanner:
 
@@ -32,9 +34,11 @@ class jonathans_scanner:
 	        thread = runThread(cmd, log)
 
 	def launchZaproxy(self):
-		cmd = '/usr/share/zaproxy/zap.sh -daemon -dir ' + self.reports + ' -newsession ' + self.ultilty_name
-		zaproxy_instance = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, preexec_fn=os.setsid) 
-		return zaproxy_instance
+		zap = ZAPv2()
+
+		#cmd = '/usr/share/zaproxy/zap.sh -daemon -dir ' + self.reports + ' -newsession ' + self.ultilty_name
+		#zaproxy_instance = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, preexec_fn=os.setsid) 
+		#return zaproxy_instance
 
 	def closeZaproxy(self, zaproxy_instance):
 		os.killpg(os.getpgid(zaproxy_instance.pid), signal.SIGTERM)
@@ -53,12 +57,12 @@ class jonathans_scanner:
 		self.logfile = os.path.join(self.reports, self.fixed_base_url + '.txt')
 
 	def begin(self, cmd):
-		cmd = '/usr/share/zaproxy/zap.sh -newsession ' + self.ultilty_name + '.zaproxy'
-		zaproxy_instance = subprocess.Popen(cmd, shell=True, preexec_fn=os.setsid) 
+		#cmd = '/usr/share/zaproxy/zap.sh -newsession ' + self.ultilty_name + '.zaproxy'
+		#zaproxy_instance = subprocess.Popen(cmd, shell=True, preexec_fn=os.setsid) 
 		with open(self.logfile, "w") as log:
 			print >> log, "Scan results"
 			self.runThread(cmd, log)
-		os.killpg(os.getpgid(zaproxy_instance.pid), signal.SIGTERM)
+		#os.killpg(os.getpgid(zaproxy_instance.pid), signal.SIGTERM)
 
 
 
