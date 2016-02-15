@@ -14,7 +14,7 @@ def main():
 		cmd = ['/usr/bin/nikto', '-Format', 'txt', '-output', scanner.reports + 'nikto-' + url + '.txt', '-Plugins', '""', '-useproxy', 'http://127.0.0.1:8080/', '-Tuning', '9', '-host' ,url]
 		cmd = ' '.join(cmd)
 
-		test = scanner.begin(cmd)
+		test = scanner.begin(cmd, base_url)
 
 if __name__ == '__main__':
 	main()

@@ -14,7 +14,7 @@ def main():
 		cmd = ['/usr/bin/arachni', '--checks', 'sql_injection*', '--http-proxy', 'http://127.0.0.1:8080', '--output-only-positives', '--report-save-path', scanner.reports, '--http-cookie-jar', scanner.cookiefile, '--scope-page-limit','1', url]
 		cmd = ' '.join(cmd)
 
-		test = scanner.begin(cmd)
+		test = scanner.begin(cmd, base_url)
 
 if __name__ == '__main__':
 	main()

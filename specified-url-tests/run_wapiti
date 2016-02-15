@@ -14,7 +14,7 @@ def main():
 		cmd = ['/usr/bin/wapiti', base_url, '-s', base_url, '--scope', 'page', '--cookie', scanner.jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '-o', scanner.logfile, '--format', 'txt', '--module', '"-all,sql,blindsql"']
 		cmd = ' '.join(cmd)
 		
-		test = scanner.begin(cmd)
+		test = scanner.begin(cmd, base_url)
 
 if __name__ == '__main__':
 	main()

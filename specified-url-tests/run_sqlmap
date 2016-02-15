@@ -14,7 +14,7 @@ def main():
 		cmd = ['/usr/bin/sqlmap', '--output-dir', scanner.reports, '-m', 'urllist.txt', '--batch', '--proxy="http://127.0.0.1:8080"', '--load-cookies', scanner.cookiefile]
 		cmd = ' '.join(cmd)
 
-		test = scanner.begin(cmd)
+		test = scanner.begin(cmd, base_url)
 
 if __name__ == '__main__':
 	main()
