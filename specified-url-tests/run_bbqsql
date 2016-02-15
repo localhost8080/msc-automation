@@ -12,7 +12,7 @@ def main():
     for url in scanner.urls:
         print url
         base_url = url[:url.find('?')]
-        fixed_base_url = re.sub('^[A-Za-z0-9]', '_', base_url)
+        fixed_base_url = re.sub('[^A-Za-z0-9]+', '_', base_url)
         scanner.logfile = os.path.join(scanner.reports, fixed_base_url + '.txt')
 
         #bbqsql takes input from a config file, we'll generate it here

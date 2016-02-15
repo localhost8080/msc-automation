@@ -12,7 +12,7 @@ def main():
 	for url in scanner.urls:
 		print url
 		base_url = url[:url.find('?')]
-		fixed_base_url = re.sub('^[A-Za-z0-9]', '_', base_url)
+		fixed_base_url = re.sub('[^A-Za-z0-9]+', '_', base_url)
 		scanner.logfile = os.path.join(scanner.reports, fixed_base_url + '.txt')
 
 		cmd = ['/usr/bin/arachni', '--checks', 'sql_injection*', '--http-proxy', 'http://127.0.0.1:8080', '--output-only-positives', '--report-save-path', scanner.reports, '--http-cookie-jar', scanner.cookiefile, '--scope-page-limit','1', url]
