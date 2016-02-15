@@ -30,11 +30,11 @@ class jonathans_scanner:
 
 	def launchZaproxy(self):
 		cmd = '/usr/share/zaproxy/zap.sh -daemon -dir ' + self.reports + ' -newsession ' + self.ultilty_name
-		zaproxy_instance = subprocess.Popen("exec " + cmd, stdout=subprocess.PIPE, shell=True, universal_newlines=True, preexec_fn=os.setsid)
-		return zaproxy_instance.pid
+		zaproxy_instance = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, preexec_fn=os.setsid) 
+		return zaproxy_instance
 
 	def closeZaproxy(self, zaproxy_instance):
-		os.killpg(os.getpgid(zaproxy_instance), signal.SIGTERM)
+		os.killpg(os.getpgid(zaproxy_instance.pid), signal.SIGTERM)
 		
 	def authenticate(self):
 		# we cant cleanup after, due to the way subprocess forks, so we will do a cleanup before
@@ -46,10 +46,10 @@ class jonathans_scanner:
 
 	def begin(self, cmd):
 		with open(self.logfile, "w") as log:
-			#zaproxy_instance = self.launchZaproxy
+			zaproxy_instance = self.launchZaproxy
 			print >> log, "Scan results"
 			self.runThread(cmd, log)
-			#self.closeZaproxy(zaproxy_instance)
+			self.closeZaproxy(zaproxy_instance)
 
 
 
