@@ -29,6 +29,11 @@ def main():
 			print >> configfile,  "audit blind_sqli\n"
 			print >> configfile,  "audit config blind_sqli\n"
 			print >> configfile,  "set eq_limit 0.89\n"
+			print >> configfile,  "crawl config web_spider\n"
+			print >> configfile,  "set ignore_regex *logout*.*\n"
+			print >> configfile,  "set only_forward True\n"
+
+			print >> configfile,  "back\n"
 			print >> configfile,  "back\n"
 
 			print >> configfile,  "output text_file\n"
