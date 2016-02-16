@@ -25,7 +25,7 @@ def main():
             print >> configfile, "technique = binary_search\n"
             print >> configfile, "comparison_attr = size\n"
             print >> configfile, "concurrency = 30\n"
-            print >> configfile, "csv_output_file = "+  scanner.reports +"/bbqsql-output.csv\n"
+            print >> configfile, "csv_output_file = "+  scanner.logfile +"\n"
 
         cmd = ['/usr/bin/bbqsql', '-c', 'bbqsql.conf']
         cmd = ' '.join(cmd)
