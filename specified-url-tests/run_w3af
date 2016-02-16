@@ -1,85 +1,56 @@
-#!/bin/sh
-./authenticate-dvwa
+#!/usr/bin/env python
+from jonathans_scanner import jonathans_scanner
 
-#make a w3af script with this cookie info in it and some other options
+def main():
 
-session_id=`grep PHPSESSID < cookie.txt | awk '{print $7}'`
+    name = 'w3af'
 
-echo > w3af.script
+    scanner = jonathans_scanner(name)
 
+    for url in scanner.urls:
+	    print url
+	    scanner.setUrls(url)
 
-echo -n "target\n" >> w3af.script
-echo -n "set target file://$(pwd)/dvwa-urls.txt\n" >> w3af.script
-echo -n "back\n" >> w3af.script
+	    #bbqsql takes input from a config file, we'll generate it here
+	    with open('w3af.script', "w") as configfile:
 
-echo -n "http-settings\n" >> w3af.script
-echo -n "set cookie_jar_file file://$(pwd)/cookie.txt\n" >> w3af.script
-echo -n "back\n" >> w3af.script
+			print >> configfile,  "target\n"
+			print >> configfile,  "set target "+url+"\n"
+			print >> configfile,  "back\n"
 
-echo -n "plugins\n" >> w3af.script
-echo -n "audit sqli\n" >> w3af.script
-echo -n "audit blind_sqli\n" >> w3af.script
-echo -n "audit config blind_sqli\n" >> w3af.script
-echo -n "set eq_limit 0.89\n" >> w3af.script
-echo -n "back\n" >> w3af.script
+			print >> configfile,  "http-settings\n"
+			print >> configfile,  "set cookie_jar_file file://"+scanner.cookiefile+"\n"
+			print >> configfile,  "back\n"
 
-echo -n "output text_file\n" >> w3af.script
-echo -n "output config text_file\n" >> w3af.script
-echo -n "set output_file $(pwd)/reports/w3af/w3af.txt\n" >> w3af.script
-echo -n "set verbose True\n" >> w3af.script
+			print >> configfile,  "plugins\n"
+			print >> configfile,  "audit sqli\n"
+			print >> configfile,  "audit blind_sqli\n"
+			print >> configfile,  "audit config blind_sqli\n"
+			print >> configfile,  "set eq_limit 0.89\n"
+			print >> configfile,  "back\n"
 
-echo -n "back\n" >> w3af.script
-echo -n "back\n" >> w3af.script
+			print >> configfile,  "output text_file\n"
+			print >> configfile,  "output config text_file\n"
+			print >> configfile,  "set output_file "+scanner.logfile+"\n"
+			print >> configfile,  "set verbose True\n"
 
-echo -n "start\n" >> w3af.script
-echo -n "back\n" >> w3af.script
-echo -n "exit\n" >> w3af.script
+			print >> configfile,  "back\n"
+			print >> configfile,  "back\n"
 
-w3af_console -s w3af.script
+			print >> configfile,  "start\n"
+			print >> configfile,  "back\n"
+			print >> configfile,  "exit\n"
 
-./cleanup
+	    cmd = ['/usr/bin/w3af_console', '-s', 'w3af.script']
+	    cmd = ' '.join(cmd)
 
+	    test = scanner.begin(cmd)
 
-
-
-
-./authenticate-dvwa
-
-#make a w3af script with this cookie info in it and some other options
-
-session_id=`grep PHPSESSID < cookie.txt | awk '{print $7}'`
-
-echo > w3af.script
+if __name__ == '__main__':
+    main()
 
 
-echo -n "target\n" >> w3af.script
-echo -n "set target file://$(pwd)/wordpress1-5-urls.txt\n" >> w3af.script
-echo -n "back\n" >> w3af.script
 
-echo -n "http-settings\n" >> w3af.script
-echo -n "set cookie_jar_file file://$(pwd)/cookie.txt\n" >> w3af.script
-echo -n "back\n" >> w3af.script
 
-echo -n "plugins\n" >> w3af.script
-echo -n "audit sqli\n" >> w3af.script
-echo -n "audit blind_sqli\n" >> w3af.script
-echo -n "audit config blind_sqli\n" >> w3af.script
-echo -n "set eq_limit 0.89\n" >> w3af.script
-echo -n "back\n" >> w3af.script
 
-echo -n "output text_file\n" >> w3af.script
-echo -n "output config text_file\n" >> w3af.script
-echo -n "set output_file $(pwd)/reports/w3af/w3af.txt\n" >> w3af.script
-echo -n "set verbose True\n" >> w3af.script
-
-echo -n "back\n" >> w3af.script
-echo -n "back\n" >> w3af.script
-
-echo -n "start\n" >> w3af.script
-echo -n "back\n" >> w3af.script
-echo -n "exit\n" >> w3af.script
-
-w3af_console -s w3af.script
-
-./cleanup
 
