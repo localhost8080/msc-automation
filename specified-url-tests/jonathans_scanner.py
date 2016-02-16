@@ -25,8 +25,8 @@ class jonathans_scanner:
 
 	def runThread(self, cmd, logfile):
 		print cmd
-	    thread = subprocess.Popen("exec " + cmd, shell=True, universal_newlines=True, stdout=logfile)
-	    thread.wait()
+		thread = subprocess.Popen("exec " + cmd, shell=True, universal_newlines=True, stdout=logfile)
+		thread.wait()
 	    
 	def logResult(self, cmd, logname):
 	    with open(logname, "a") as log:
