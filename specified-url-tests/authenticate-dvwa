@@ -15,8 +15,8 @@ wget -O /dev/null --load-cookie cookie.txt --keep-session-cookies --save-cookies
 #alter the first line
 sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' cookie.txt
 # and the 5th word int he 5th line and the 5th word in the 6th line (wget cookie uses expiry time of 0, we need 9999999999 for w3af to work)
-sed -i '5  s/[^ ]*[^ ]/999999999999/5' cookie.txt
-sed -i '6  s/[^ ]*[^ ]/999999999999/5' cookie.txt
+sed -i '5  s/0/999999999999/5' cookie.txt
+sed -i '6  s/0/999999999999/5' cookie.txt
 #get a wapiti cookie
 wapiti-getcookie cookie.json http://dvwa.dev/login.php
 
