@@ -20,7 +20,7 @@ sed -i '6  s/0/999999999999/' cookie.txt
 #get a wapiti cookie
 
 expect -c "
-   set timeout 10
+   set timeout 1
    spawn wapiti-getcookie cookie.json http://dvwa.dev/login.php
    expect username { send admin\r ; exp_continue }
    expect password { send password\r ; exp_continue }
