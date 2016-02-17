@@ -30,7 +30,7 @@ expect -c "
    send \r
    expect user_token 
    send \r
-   exit"
+   expect"
 
 
 #text file with just the session id in it
