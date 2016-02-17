@@ -1,4 +1,4 @@
-http://wordpress1-5.dev/wp-trackback.php?tb_id=1&url=bla&title=bla&blog_name=bla
-http://wordpress1-5.dev/?cat=1 
 http://dvwa.dev/vulnerabilities/sqli/?id=1&Submit=Submit
 http://dvwa.dev/vulnerabilities/sqli_blind/?id=1&Submit=Submit
+http://wordpress1-5.dev/wp-trackback.php?tb_id=1&url=bla&title=bla&blog_name=bla
+http://wordpress1-5.dev/?cat=1 
