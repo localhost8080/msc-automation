@@ -13,7 +13,7 @@ def main():
 		print url
 		scanner.setUrls(url)
 		
-		cmd = ['/usr/bin/sqlmap', '--output-dir', scanner.reports, '-u', url, '--proxy="http://127.0.0.1:8080"', '--threads', '5', '--level', '3', '--risk', '3', '--cookie="security=low; PHPSESSID='+ scanner.session_id +'"']
+		cmd = ['/usr/bin/sqlmap', '--output-dir', scanner.reports, '-u', url, '--proxy="http://127.0.0.1:8080"', '--threads=5', '--level=3', '--risk=3', '--cookie="security=low; PHPSESSID='+ scanner.session_id +'"']
 		cmd = ' '.join(cmd)
 
 		test = scanner.begin(cmd)
