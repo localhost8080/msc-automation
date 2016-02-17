@@ -21,7 +21,7 @@ def main():
 
             print >> configfile, "\n"
             print >> configfile, "[HTTP Config]\n"
-            print >> configfile, 'query = " and ASCII(SUBSTR((SELECT data FROM data LIMIT 1 OFFSET ${row_index:1}),${char_index:1},1))${comparator:>}${char_val:0} "\n' >> bbqsql.conf
+            print >> configfile, 'query = " and ASCII(SUBSTR((SELECT data FROM data LIMIT 1 OFFSET ${row_index:1}),${char_index:1},1))${comparator:>}${char_val:0} "\n'
             print >> configfile, "technique = binary_search\n"
             print >> configfile, "comparison_attr = size\n"
             print >> configfile, "concurrency = 30\n"
