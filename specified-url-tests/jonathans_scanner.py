@@ -18,7 +18,7 @@ class jonathans_scanner:
 		self.jsoncookiefile = os.path.join(self.pwd,'cookie.json')
 		self.urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'urllist.txt'))]
 		self.authenticated = self.authenticate()
-		self.session_id = line.rstrip('\n') for line in open(os.path.join(self.pwd,'session.txt'))
+		self.session_id = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'session.txt'))]
 		self.logfile = ''
 		self.base_url = ''
 		self.fixed_base_url = ''
