@@ -18,15 +18,15 @@ sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' cookie.txt
 sed -i '5  s/0/999999999999/' cookie.txt
 sed -i '6  s/0/999999999999/' cookie.txt
 #get a wapiti cookie
-wapiti-getcookie cookie.json http://dvwa.dev/login.php
-expect "username"
-send "admin\n" 
-expect "password"
-send "password\n" 
-expect "Login"
-send "\n" 
-expect "user_token"
-send "\n" 
+
+expect -c "
+   set timeout 1
+   spawn wapiti-getcookie cookie.json http://dvwa.dev/login.php
+   expect username { send admin\r ; exp_continue }
+   expect password { send password\r }
+   expect Login {send \r}
+   expect user_token {send \r}
+   exit"
 
 
 #text file with just the session id in it
