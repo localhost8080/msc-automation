@@ -23,9 +23,9 @@ expect -c "
    set timeout 10
    spawn wapiti-getcookie cookie.json http://dvwa.dev/login.php
    expect username { send admin\r ; exp_continue }
-   expect password { send password\r }
-   expect Login {send \r}
-   expect user_token {send \r}
+   expect password { send password\r ; exp_continue }
+   expect Login {send \r ; exp_continue}
+   expect user_token {send \r ; exp_continue}
    exit"
 
 
