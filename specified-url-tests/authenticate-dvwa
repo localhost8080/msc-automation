@@ -19,6 +19,15 @@ sed -i '5  s/0/999999999999/' cookie.txt
 sed -i '6  s/0/999999999999/' cookie.txt
 #get a wapiti cookie
 wapiti-getcookie cookie.json http://dvwa.dev/login.php
+expect "username"
+send "admin\n" 
+expect "password"
+send "password\n" 
+expect "Login"
+send "\n" 
+expect "user_token"
+send "\n" 
+
 
 #text file with just the session id in it
 session_id=`grep PHPSESSID < cookie.txt | awk '{print $7}'`
