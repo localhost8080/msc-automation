@@ -1,1 +1,20 @@
-run_openvas
+#!/usr/bin/env python
+from jonathans_scanner import jonathans_scanner
+
+def main():
+
+	name = 'openvas'
+
+	scanner = jonathans_scanner(name)
+
+	for url in scanner.urls:
+		print url
+		scanner.setUrls(url)
+
+		cmd = ['/usr/bin/omp', url]
+		cmd = ' '.join(cmd)
+
+		test = scanner.begin(cmd)
+
+if __name__ == '__main__':
+	main()
