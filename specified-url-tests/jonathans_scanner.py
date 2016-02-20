@@ -26,15 +26,10 @@ class jonathans_scanner:
 
 	def runThread(self, cmd, logfile):
 		print >> logfile, "\n"+cmd+"\n\n\n"
+		print "\n"+cmd+"\n\n\n"
 		thread = subprocess.Popen("exec " + cmd , shell=True, stdout=logfile)
 		thread.wait()
 	    
-	def logResult(self, cmd, logname):
-	    with open(logname, "a") as log:
-	        print >> log, "loading scanner: " + cmd
-	        print cmd
-	        thread = runThread(cmd, log)
-
 	def launchZaproxy(self):
 		zap = ZAPv2()
 
