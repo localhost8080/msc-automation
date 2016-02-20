@@ -25,7 +25,7 @@ class jonathans_scanner:
 		self.fixed_base_url = ''
 
 	def runThread(self, cmd, logfile):
-		print cmd
+		print >> logfile, "\n"+cmd+"\n\n\n"
 		thread = subprocess.Popen("exec " + cmd , shell=True, stdout=logfile)
 		thread.wait()
 	    
@@ -62,7 +62,7 @@ class jonathans_scanner:
 		#cmd = '/usr/share/zaproxy/zap.sh -newsession ' + self.ultilty_name + '.zaproxy'
 		#zaproxy_instance = subprocess.Popen(cmd, shell=True, preexec_fn=os.setsid) 
 		with open(self.logfile, "w") as log:
-			print >> log, "Scan results"
+			print >> log, "Scan results\n"
 			self.runThread(cmd, log)
 		#os.killpg(os.getpgid(zaproxy_instance.pid), signal.SIGTERM)
 
