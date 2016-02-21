@@ -23,7 +23,7 @@ class jonathans_scanner:
 
 		self.wp15_cookiefile = os.path.join(self.pwd,'wordpress1-5cookie.txt')
 		self.wp15_jsoncookiefile = os.path.join(self.pwd,'wordpress1-5cookie.json')
-		self.wp15_urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'wordpress1-5urls.txt'))]
+		self.wp15_urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'wordpress1-5-urls.txt'))]
 
 		self.authenticated = self.authenticate()
 		dvwa_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'session.txt'))]
