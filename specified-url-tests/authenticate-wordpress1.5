@@ -21,6 +21,10 @@ expect -c "
    send admin\r
    expect pwd 
    send password\r
+   expect submit
+   send \r
+   expect redirect_to
+   send \r
    expect"
 
 
