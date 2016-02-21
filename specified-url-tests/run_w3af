@@ -53,7 +53,7 @@ def main():
 	    cmd = ' '.join(cmd)
 
 	    test = scanner.begin(cmd)
-
+	    
 	for url in scanner.wp15_urls:
 	    print url
 	    scanner.setUrls(url)
