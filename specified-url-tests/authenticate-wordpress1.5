@@ -38,5 +38,5 @@ echo -n '"'$session_name'='$session_id';'$session_name2'='$session_id2'"' > word
 
 #nikto cookie
 #make a nikto config with this cookie info in it and some other nikto options
-echo -n 'STATIC-COOKIE="'$session_name2'"="'$session_id2'";"'$session_name'"="'$session_id'"' > nikto.conf
+echo -n 'STATIC-COOKIE="'$session_name2'"="'$session_id2'";"'$session_name'"="'$session_id'"' > wp15_nikto.conf
 
