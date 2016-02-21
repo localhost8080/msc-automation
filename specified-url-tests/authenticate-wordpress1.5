@@ -29,10 +29,14 @@ expect -c "
 
 
 #text file with just the session id in it
-session_id=`grep PHPSESSID < wordpress1-5cookie.txt | awk '{print $7}'`
-echo -n $session_id > wordpress1-5session.txt
+session_id=`grep wordpresspass < wordpress1-5cookie.txt | awk '{print $7}'`
+session_name=`grep wordpresspass < wordpress1-5cookie.txt | awk '{print $6}'`
+session_id2=`grep wordpressuser < wordpress1-5cookie.txt | awk '{print $7}'`
+session_name2=`grep wordpressuser < wordpress1-5cookie.txt | awk '{print $6}'`
+echo -n '"'$(session_name)'='$(session_id)';'$(session_name2)'='$(session_id2)'"' > wordpress1-5session.txt
+
 
 #nikto cookie
 #make a nikto config with this cookie info in it and some other nikto options
-echo -n 'STATIC-COOKIE="security"="low";"PHPSESSID"="'$session_id'"' > nikto.conf
+echo -n 'STATIC-COOKIE="'$session_name2'"="'$session_id2'";"'$session_name'"="'$session_id'"' > nikto.conf
 

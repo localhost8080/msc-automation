@@ -41,7 +41,7 @@ def main():
             print >> configfile, "[Request Config]\n" 
             print >> configfile, "url = " + url + "\n"
             print >> configfile, "method = POST\n"
-            print >> configfile, 'cookies = "security=low;PHPSESSID=' + scanner.dvwa_session_id + '"\n'
+            print >> configfile, 'cookies = ' + scanner.dvwa_session_id + '\n'
             print >> configfile, 'proxies = {"http": "127.0.0.1:8080","https": "127.0.0.1:8080"}\n'
 
             print >> configfile, "\n"
