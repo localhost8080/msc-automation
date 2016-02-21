@@ -4,3 +4,8 @@ rm cookie.txt
 rm cookie.json
 rm nikto.conf
 rm w3af.script
+rm session.txt
+rm bbqsql.conf
+rm wordpress1-5cookie.txt
+rm wordpress1-5cookie.json
+rm wordpress1-5session.txt
