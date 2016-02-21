@@ -58,7 +58,7 @@ class jonathans_scanner:
 		authenticate = subprocess.Popen(os.path.join(self.pwd,'authenticate-dvwa'), shell=False)
 		authenticate.wait()
 
-		authenticate = subprocess.Popen(os.path.join(self.pwd,'authenticate-wordpress1-5'), shell=False)
+		authenticate = subprocess.Popen(os.path.join(self.pwd,'authenticate-wordpress1.5'), shell=False)
 		authenticate.wait()		
 
 	def setUrls(self, url):
