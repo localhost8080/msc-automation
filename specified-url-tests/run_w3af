@@ -7,7 +7,7 @@ def main():
 
     scanner = jonathans_scanner(name)
 
-    for url in scanner.urls:
+    for url in scanner.dvwa_urls:
 	    print url
 	    scanner.setUrls(url)
 
@@ -19,7 +19,54 @@ def main():
 			print >> configfile,  "back\n"
 
 			print >> configfile,  "http-settings\n"
-			print >> configfile,  "set cookie_jar_file "+scanner.cookiefile+"\n"
+			print >> configfile,  "set cookie_jar_file "+scanner.dvwa_cookiefile+"\n"
+			print >> configfile,  "set proxy_address 127.0.0.1\n"
+			print >> configfile,  "set proxy_port 8080\n"
+			print >> configfile,  "back\n"
+
+			print >> configfile,  "plugins\n"
+			print >> configfile,  "audit sqli\n"
+			print >> configfile,  "audit blind_sqli\n"
+			print >> configfile,  "audit config blind_sqli\n"
+			print >> configfile,  "set eq_limit 0.89\n"
+			print >> configfile,  "back\n"
+
+			print >> configfile,  "crawl config web_spider\n"
+			print >> configfile,  "set ignore_regex *logout*.*\n"
+			print >> configfile,  "set only_forward True\n"
+
+			print >> configfile,  "back\n"
+
+			print >> configfile,  "output text_file\n"
+			print >> configfile,  "output config text_file\n"
+			print >> configfile,  "set output_file "+scanner.logfile+"\n"
+			print >> configfile,  "set verbose True\n"
+
+			print >> configfile,  "back\n"
+			print >> configfile,  "back\n"
+
+			print >> configfile,  "start\n"
+			print >> configfile,  "back\n"
+			print >> configfile,  "exit\n"
+
+	    cmd = ['/usr/bin/w3af_console', '-s', 'w3af.script']
+	    cmd = ' '.join(cmd)
+
+	    test = scanner.begin(cmd)
+
+	    for url in scanner.wp15_urls:
+	    print url
+	    scanner.setUrls(url)
+
+	    #bbqsql takes input from a config file, we'll generate it here
+	    with open('w3af.script', "w") as configfile:
+
+			print >> configfile,  "target\n"
+			print >> configfile,  "set target "+url+"\n"
+			print >> configfile,  "back\n"
+
+			print >> configfile,  "http-settings\n"
+			print >> configfile,  "set cookie_jar_file "+scanner.wp15_cookiefile+"\n"
 			print >> configfile,  "set proxy_address 127.0.0.1\n"
 			print >> configfile,  "set proxy_port 8080\n"
 			print >> configfile,  "back\n"

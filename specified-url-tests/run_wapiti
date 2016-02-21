@@ -9,11 +9,20 @@ def main():
 
 	scanner = jonathans_scanner(name)
 
-	for url in scanner.urls:
+	for url in scanner.dvwa_urls:
 		print url
 		scanner.setUrls(url)
 
-		cmd = ['/usr/bin/wapiti', scanner.base_url, '-s', scanner.base_url, '--scope', 'page', '--cookie', scanner.jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '-o', scanner.logfile, '--format', 'txt', '--module', '"-all,sql,blindsql"']
+		cmd = ['/usr/bin/wapiti', scanner.base_url, '-s', scanner.base_url, '--scope', 'page', '--cookie', scanner.dvwa_jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '-o', scanner.logfile, '--format', 'txt', '--module', '"-all,sql,blindsql"']
+		cmd = ' '.join(cmd)
+		
+		test = scanner.begin(cmd)
+
+	for url in scanner.wp15_urls:
+		print url
+		scanner.setUrls(url)
+
+		cmd = ['/usr/bin/wapiti', scanner.base_url, '-s', scanner.base_url, '--scope', 'page', '--cookie', scanner.wp15_jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '-o', scanner.logfile, '--format', 'txt', '--module', '"-all,sql,blindsql"']
 		cmd = ' '.join(cmd)
 		
 		test = scanner.begin(cmd)
