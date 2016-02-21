@@ -16,18 +16,18 @@ class jonathans_scanner:
 		self.reports = os.path.join(self.reports_path, self.ultilty_name)
 		
 		# need these for dvwa and for wordpress
-		self.cookiefile = os.path.join(self.pwd,'cookie.txt')
-		self.jsoncookiefile = os.path.join(self.pwd,'cookie.json')
+		self.dvwa_cookiefile = os.path.join(self.pwd,'cookie.txt')
+		self.dvwa_jsoncookiefile = os.path.join(self.pwd,'cookie.json')
 		self.dvwa_urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'dvwa-urls.txt'))]
 
 
-		self.wp15cookiefile = os.path.join(self.pwd,'wordpress1-5cookie.txt')
-		self.wp15jsoncookiefile = os.path.join(self.pwd,'wordpress1-5cookie.json')
+		self.wp15_cookiefile = os.path.join(self.pwd,'wordpress1-5cookie.txt')
+		self.wp15_jsoncookiefile = os.path.join(self.pwd,'wordpress1-5cookie.json')
 		self.wp15_urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'wordpress1-5urls.txt'))]
 
 		self.authenticated = self.authenticate()
 		dvwa_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'session.txt'))]
-		wp15-session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'session.txt'))]
+		wp15-session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'wordpress1-5session.txt'))]
 		self.dvwa_session_id = ' '.join(dvwa_session_content)
 		self.wo15_session_id = ' '.join(wp15_session_content)
 		self.logfile = ''
