@@ -33,7 +33,7 @@ session_id=`grep wordpresspass < wordpress1-5cookie.txt | awk '{print $7}'`
 session_name=`grep wordpresspass < wordpress1-5cookie.txt | awk '{print $6}'`
 session_id2=`grep wordpressuser < wordpress1-5cookie.txt | awk '{print $7}'`
 session_name2=`grep wordpressuser < wordpress1-5cookie.txt | awk '{print $6}'`
-echo -n '"'$(session_name)'='$(session_id)';'$(session_name2)'='$(session_id2)'"' > wordpress1-5session.txt
+echo -n '"'$session_name'='$session_id';'$session_name2'='$session_id2'"' > wordpress1-5session.txt
 
 
 #nikto cookie
