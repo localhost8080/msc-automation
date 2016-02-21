@@ -27,7 +27,7 @@ class jonathans_scanner:
 
 		self.authenticated = self.authenticate()
 		dvwa_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'session.txt'))]
-		wp15-session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'wordpress1-5session.txt'))]
+		wp15_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'wordpress1-5session.txt'))]
 		self.dvwa_session_id = ' '.join(dvwa_session_content)
 		self.wp15_session_id = ' '.join(wp15_session_content)
 		self.logfile = ''
