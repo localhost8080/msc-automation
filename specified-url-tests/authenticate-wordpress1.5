@@ -5,7 +5,7 @@
 # login into the page and save the cookies
 postdata="log=admin&pwd=password"
 
-wget -O /dev/null --load-cookie cookie.txt --keep-session-cookies --save-cookies cookie.txt --post-data ${postdata} http://wordpress1-5.dev/wp-login.php
+wget -O /dev/null --load-cookie cookie.txt --keep-session-cookies --save-cookies wordpress1-5cookie.txt --post-data ${postdata} http://wordpress1-5.dev/wp-login.php
 
 #alter the first line
 sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' wordpress1-5cookie.txt
