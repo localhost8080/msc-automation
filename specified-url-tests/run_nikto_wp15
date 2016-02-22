@@ -10,6 +10,9 @@ def main():
 
 	scanner = jonathans_scanner(name)
 
+	authenticate = subprocess.Popen('rm nikto.conf && mv wp15_nikto.conf nikto.conf', shell=False)
+	authenticate.wait()
+
 	for url in scanner.wp15_urls:
 		print url
 		scanner.setUrls(url)
