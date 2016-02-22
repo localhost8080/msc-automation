@@ -10,7 +10,9 @@ def main():
 
 	scanner = jonathans_scanner(name)
 
-	authenticate = subprocess.Popen('rm '+ os.path.join(scanner.pwd, 'nikto.conf') + ' && mv '+ os.path.join(scanner.pwd, 'wp15_nikto.conf') + ' ' + os.path.join(scanner.pwd,'nikto.conf'), shell=False)
+	cmd = ['rm', os.path.join(scanner.pwd, 'nikto.conf'), '&&', 'mv', os.path.join(scanner.pwd, 'wp15_nikto.conf'), os.path.join(scanner.pwd,'nikto.conf')]
+
+	authenticate = subprocess.Popen(cmd, shell=False)
 	authenticate.wait()
 
 	for url in scanner.wp15_urls:
