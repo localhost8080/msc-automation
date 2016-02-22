@@ -16,6 +16,12 @@ def main():
 
 		test = scanner.begin(cmd)
 
+    # move the nikto config file
+	authenticate = subprocess.Popen('rm ' + os.path.join(self.pwd,'nikto.conf'), shell=False)
+	authenticate.wait()
+	authenticate = subprocess.Popen('mv ' + os.path.join(self.pwd,'wp15_nikto.conf') + ' ' + os.path.join(self.pwd,'nikto.conf'), shell=False)
+	authenticate.wait()
+
 	for url in scanner.wp15_urls:
 		print url
 		scanner.setUrls(url)
