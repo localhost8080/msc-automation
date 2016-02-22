@@ -10,7 +10,7 @@ def main():
 
 	scanner = jonathans_scanner(name)
 
-	for url in scanner.dvwa_urls:
+	for url in scanner.wp15_urls:
 		print url
 		scanner.setUrls(url)
 		
