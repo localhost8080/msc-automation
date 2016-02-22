@@ -59,7 +59,7 @@ class jonathans_scanner:
 		authenticate.wait()
 
 		authenticate = subprocess.Popen(os.path.join(self.pwd,'authenticate-wordpress1.5'), shell=False)
-		authenticate.wait()		
+		authenticate.wait()
 
 	def setUrls(self, url):
 		self.base_url = url[:url.find('?')]
