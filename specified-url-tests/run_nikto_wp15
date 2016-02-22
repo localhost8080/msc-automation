@@ -12,6 +12,7 @@ def main():
 
 	cmd = ['rm', os.path.join(scanner.pwd, 'nikto.conf'), '&&', 'mv', os.path.join(scanner.pwd, 'wp15_nikto.conf'), os.path.join(scanner.pwd,'nikto.conf')]
 	cmd = ' '.join(cmd)
+	print cmd
 
 	authenticate = subprocess.Popen(cmd, shell=False)
 	authenticate.wait()
