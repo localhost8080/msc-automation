@@ -32,6 +32,8 @@ expect -c "
    send \r
    expect"
 
+sed -i '5  s/null/999999999999/' cookie.json
+sed -i '13  s/null/999999999999/' cookie.json
 
 #text file with just the session id in it
 session_id=`grep PHPSESSID < cookie.txt | awk '{print $7}'`
