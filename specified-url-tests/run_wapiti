@@ -13,7 +13,7 @@ def main():
 		print url
 		scanner.setUrls(url)
 
-		cmd = ['/usr/bin/wapiti', scanner.base_url, '-s', scanner.base_url, '--scope', 'page', '--cookie', scanner.dvwa_jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '-o', scanner.logfile + '.log', '--format', 'txt', '--module', '"-all,sql,blindsql"']
+		cmd = ['/usr/bin/wapiti', scanner.base_url, '-s', scanner.base_url, '--scope', 'page', '--cookie', scanner.dvwa_jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '-o', scanner.logfile + '.log', '--module', '"-all,sql,blindsql"']
 		cmd = ' '.join(cmd)
 		
 		test = scanner.begin(cmd)
@@ -22,7 +22,7 @@ def main():
 		print url
 		scanner.setUrls(url)
 
-		cmd = ['/usr/bin/wapiti', scanner.base_url, '-s', scanner.base_url, '--scope', 'page', '--cookie', scanner.wp15_jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '-o', scanner.logfile + '.log', '--format', 'txt', '--module', '"-all,sql,blindsql"']
+		cmd = ['/usr/bin/wapiti', scanner.base_url, '-s', scanner.base_url, '--scope', 'page', '--cookie', scanner.wp15_jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '-o', scanner.logfile + '.log', '--module', '"-all,sql,blindsql"']
 		cmd = ' '.join(cmd)
 		
 		test = scanner.begin(cmd)
