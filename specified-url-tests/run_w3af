@@ -39,7 +39,7 @@ def main():
 
             print >> configfile,  "output text_file\n"
             print >> configfile,  "output config text_file\n"
-            print >> configfile,  "set output_file "+scanner.logfile+".log \n"
+            print >> configfile,  "set output_file "+scanner.logfile+"\n"
             print >> configfile,  "set verbose True\n"
 
             print >> configfile,  "back\n"
@@ -86,7 +86,7 @@ def main():
 
             print >> configfile,  "output text_file\n"
             print >> configfile,  "output config text_file\n"
-            print >> configfile,  "set output_file "+scanner.logfile+".log \n"
+            print >> configfile,  "set output_file "+scanner.logfile+"\n"
             print >> configfile,  "set verbose True\n"
 
             print >> configfile,  "back\n"
