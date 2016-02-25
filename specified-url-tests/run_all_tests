@@ -1,13 +1,13 @@
 #!/bin/sh
 #run all my tests
-./run_arachni
+#./run_arachni
 #./run_bbqsql
 ./run_nikto
 ./run_nikto_wp15
-./run_openvas
+#./run_openvas
 #./run_sqlix
 ./run_sqlmap
-./run_the_mole
-./run_vega
+#./run_the_mole
+#./run_vega
 ./run_w3af
 ./run_wapiti
