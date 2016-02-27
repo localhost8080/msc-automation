@@ -26,9 +26,9 @@ class jonathans_scanner:
 		self.wp15_urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'wp15_urls.txt'))]
 
 		# need these for drupal
-		self.drupal_cookiefile = os.path.join(self.pwd,'drupal_cookie.txt')
-		self.drupal_jsoncookiefile = os.path.join(self.pwd,'drupal_cookie.json')
-		self.drupal_urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'drupal_urls.txt'))]
+		#self.drupal_cookiefile = os.path.join(self.pwd,'drupal_cookie.txt')
+		#self.drupal_jsoncookiefile = os.path.join(self.pwd,'drupal_cookie.json')
+		#self.drupal_urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'drupal_urls.txt'))]
 
 		# need these for joomla
 		self.joomla_cookiefile = os.path.join(self.pwd,'joomla_cookie.txt')
@@ -39,7 +39,7 @@ class jonathans_scanner:
 		self.authenticated = self.authenticate()
 		dvwa_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'session.txt'))]
 		wp15_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'wp15_session.txt'))]
-		drupal_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'drupal_session.txt'))]
+		#drupal_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'drupal_session.txt'))]
 		joomla_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'joomla_session.txt'))]
 		self.dvwa_session_id = ' '.join(dvwa_session_content)
 		self.wp15_session_id = ' '.join(wp15_session_content)

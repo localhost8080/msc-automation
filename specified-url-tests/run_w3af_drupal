@@ -19,7 +19,7 @@ def main():
             print >> configfile,  "back\n"
 
             print >> configfile,  "http-settings\n"
-            print >> configfile,  "set cookie_jar_file "+scanner.drupal_cookiefile+"\n"
+            #print >> configfile,  "set cookie_jar_file "+scanner.drupal_cookiefile+"\n"
             print >> configfile,  "set proxy_address 127.0.0.1\n"
             print >> configfile,  "set proxy_port 8080\n"
             print >> configfile,  "back\n"
