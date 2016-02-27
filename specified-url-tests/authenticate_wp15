@@ -1,0 +1,42 @@
+#!/bin/sh
+
+# simple bash script to get wordpress auth page using wget and save the cookie
+
+# login into the page and save the cookies
+postdata="log=admin&pwd=password"
+
+wget -O /dev/null --keep-session-cookies --save-cookies wp15_cookie.txt --post-data ${postdata} http://wordpress1-5.dev/wp-login.php
+
+#alter the first line
+sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' wp15_cookie.txt
+# and the 5th word int he 5th line and the 5th word in the 6th line (wget cookie uses expiry time of 0, we need 9999999999 for w3af to work)
+# sed -i '5  s/0/999999999999/' cookie.txt
+# sed -i '6  s/0/999999999999/' cookie.txt
+#get a wapiti cookie
+
+expect -c "
+   set timeout 1
+   spawn wapiti-getcookie wordpress1-5cookie.json http://wordpress1-5.dev/wp-login.php
+   expect log
+   send admin\r
+   expect pwd 
+   send password\r
+   expect submit
+   send \r
+   expect redirect_to
+   send \r
+   expect"
+
+
+#text file with just the session id in it
+session_id=`grep wordpresspass < wp15_cookie.txt | awk '{print $7}'`
+session_name=`grep wordpresspass < wp15_cookie.txt | awk '{print $6}'`
+session_id2=`grep wordpressuser < wp15_cookie.txt | awk '{print $7}'`
+session_name2=`grep wordpressuser < wp15_cookie.txt | awk '{print $6}'`
+echo -n '"'$session_name'='$session_id';'$session_name2'='$session_id2'"' > wp15_session.txt
+
+
+#nikto cookie
+#make a nikto config with this cookie info in it and some other nikto options
+echo -n 'STATIC-COOKIE="'$session_name2'"="'$session_id2'";"'$session_name'"="'$session_id'"' > wp15_nikto.conf
+

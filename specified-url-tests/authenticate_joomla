@@ -5,10 +5,10 @@
 # login into the page and save the cookies
 postdata="log=admin&pwd=password"
 
-wget -O /dev/null --keep-session-cookies --save-cookies wordpress1-5cookie.txt --post-data ${postdata} http://wordpress1-5.dev/wp-login.php
+wget -O /dev/null --keep-session-cookies --save-cookies joomla_cookie.txt --post-data ${postdata} http://wordpress1-5.dev/wp-login.php
 
 #alter the first line
-sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' wordpress1-5cookie.txt
+sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' joomla_cookie.txt
 # and the 5th word int he 5th line and the 5th word in the 6th line (wget cookie uses expiry time of 0, we need 9999999999 for w3af to work)
 # sed -i '5  s/0/999999999999/' cookie.txt
 # sed -i '6  s/0/999999999999/' cookie.txt
@@ -29,14 +29,14 @@ expect -c "
 
 
 #text file with just the session id in it
-session_id=`grep wordpresspass < wordpress1-5cookie.txt | awk '{print $7}'`
-session_name=`grep wordpresspass < wordpress1-5cookie.txt | awk '{print $6}'`
-session_id2=`grep wordpressuser < wordpress1-5cookie.txt | awk '{print $7}'`
-session_name2=`grep wordpressuser < wordpress1-5cookie.txt | awk '{print $6}'`
-echo -n '"'$session_name'='$session_id';'$session_name2'='$session_id2'"' > wordpress1-5session.txt
+session_id=`grep wordpresspass < joomla_cookie.txt | awk '{print $7}'`
+session_name=`grep wordpresspass < joomla_cookie.txt | awk '{print $6}'`
+session_id2=`grep wordpressuser < joomla_cookie.txt | awk '{print $7}'`
+session_name2=`grep wordpressuser < joomla_cookie.txt | awk '{print $6}'`
+echo -n '"'$session_name'='$session_id';'$session_name2'='$session_id2'"' > joomla_session.txt
 
 
 #nikto cookie
 #make a nikto config with this cookie info in it and some other nikto options
-echo -n 'STATIC-COOKIE="'$session_name2'"="'$session_id2'";"'$session_name'"="'$session_id'"' > wp15_nikto.conf
+echo -n 'STATIC-COOKIE="'$session_name2'"="'$session_id2'";"'$session_name'"="'$session_id'"' > joomla_nikto.conf
 

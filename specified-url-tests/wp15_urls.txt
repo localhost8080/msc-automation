@@ -1,12 +1,10 @@
-http://wordpress1-5.dev/wp-trackback.php?tb_id=1&url=bla&title=bla&blog_name=bla
-http://wordpress1-5.dev?cat=1
-http://wordpress1-5.dev/xmlrpc.php?post_type=1
-http://wordpress1-5.dev/wp-includes/query.php?s=1
+http://wordpress1-5.dev/wp-trackback.php?url=bla&title=bla&blog_name=bla&tb_id=1
 http://wordpress1-5.dev/wp-includes/comment.php?id=1
-http://wordpress1-5.dev/wp-trackback.php?tb_id=1&url=bla&title=bla&blog_name=bla
 http://wordpress1-5.dev/wp-admin/options-writing.php?page_options=1
 http://wordpress1-5.dev/wp-admin/options-reading.php?page_options=1
 http://wordpress1-5.dev/wp-admin/options-discussion.php?page_options=1
 http://wordpress1-5.dev/wp-admin/options-privacy.php?page_options=1
 http://wordpress1-5.dev/wp-admin/options-permalink.php?page_options=1
 http://wordpress1-5.dev/wp-admin/options-misc.php?page_options=1
+http://wordpress1-5.dev?cat=1
+http://wordpress1-5.dev/xmlrpc.php?post_id=1

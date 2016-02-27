@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+from jonathans_scanner import jonathans_scanner
+import os
+import re
+
+def main():
+
+	name = 'sqlmap'
+
+	scanner = jonathans_scanner(name)
+
+	for url in scanner.joomla_urls:
+		print url
+		scanner.setUrls(url)
+		
+		cmd = ['/usr/bin/sqlmap', '--output-dir', scanner.reports, '--dbms=MySQL', '--proxy="http://127.0.0.1:8080"', '--random-agent', '--threads=1', '--level=3', '--risk=3', '--batch', '--cookie='+ scanner.joomla_session_id, '-u', '"'+url+'"',]
+		cmd = ' '.join(cmd)
+
+		test = scanner.begin(cmd)
+
+if __name__ == '__main__':
+	main()
