@@ -2,23 +2,38 @@
 
 # simple bash script to get wordpress auth page using wget and save the cookie
 
-# get the login page to get the hidden field data
-wget --keep-session-cookies --save-cookies cookie.txt -O loginpage.html http://joomla.dev/
-# the actual user tolen is the 7th thing on this page
-user_token=`grep value < loginpage.html | grep user_token | tr '=' ' ' | awk '{print $7}' | sed s/\"//g | sed s/\'//g`
-return=`grep value < loginpage.html | grep user_token | tr '=' ' ' | awk '{print $7}' | sed s/\"//g | sed s/\'//g`
+# login script taken from http://stackoverflow.com/questions/2212557/curl-login-by-script-to-a-joomla-website
+function login {
+    Server=$1
+    User=$2
+    Pass=$3
+    Token=`wget \
+        --quiet \
+        --load-cookies joomla_cookie.txt \
+        --save-cookies joomla_cookie.txt \
+        --keep-session-cookies \
+        --output-document=- \
+        "http://${Server}/administrator" | \
+    grep -Po '"[a-zA-z0-9]{32}"' | \
+    grep -o "[^'\"]*"`
 
-rm loginpage.html
-# login into the page and save the cookies
-postdata="Login=Login&username=admin&password=password&user_token=${user_token}"
+    wget \
+        --quiet \
+        --load-cookies joomla_cookie.txt \
+        --save-cookies joomla_cookie.txt \
+        --keep-session-cookies \
+        --output-document=/dev/null \
+        --post-data="username=${User}&passwd=${Pass}&option=com_login&task=login&${Token}=1" \
+        "http://${Server}/administrator/index.php?option=com_login"
+}
 
-wget -O /dev/null --load-cookie cookie.txt --keep-session-cookies --save-cookies cookie.txt --post-data ${postdata} http://dvwa.dev/login.php
+login joomla.dev "admin" "password"
 
 #alter the first line
-sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' cookie.txt
+sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' joomla_cookie.txt
 # and the 5th word int he 5th line and the 5th word in the 6th line (wget cookie uses expiry time of 0, we need 9999999999 for w3af to work)
-sed -i '5  s/0/999999999999/' cookie.txt
-sed -i '6  s/0/999999999999/' cookie.txt
+sed -i '5  s/0/999999999999/' joomla_cookie.txt
+sed -i '6  s/0/999999999999/' joomla_cookie.txt
 #get a wapiti cookie
 
 expect -c "
