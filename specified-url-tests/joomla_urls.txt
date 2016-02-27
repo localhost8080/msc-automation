@@ -1,1 +1,1 @@
-http://joomla.dev/?option=com_contenhistory&view=history&list[ordering]=&item_id=75&type_id=1&list[select]=1
+http://joomla.dev/?option=com_contenthistory&view=history&list[ordering]=&item_id=75&type_id=1&list[select]=1
