@@ -23,7 +23,7 @@ function login {
         --save-cookies drupal_cookie.txt \
         --keep-session-cookies \
         --output-document=/dev/null \
-        --post-data="name=${User}&pass=${Pass}/" \
+        --post-data="name=${User}&pass=${Pass}&form_id=user_login_block" \
         "http://${Server}/node?destination=node"
 }
 
