@@ -28,7 +28,7 @@ class jonathans_scanner:
 		# need these for drupal
 		#self.drupal_cookiefile = os.path.join(self.pwd,'drupal_cookie.txt')
 		#self.drupal_jsoncookiefile = os.path.join(self.pwd,'drupal_cookie.json')
-		#self.drupal_urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'drupal_urls.txt'))]
+		self.drupal_urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'drupal_urls.txt'))]
 
 		# need these for joomla
 		self.joomla_cookiefile = os.path.join(self.pwd,'joomla_cookie.txt')
