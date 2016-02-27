@@ -39,8 +39,8 @@ class jonathans_scanner:
 		self.authenticated = self.authenticate()
 		dvwa_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'session.txt'))]
 		wp15_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'wp15_session.txt'))]
-		wp15_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'drupal_session.txt'))]
-		wp15_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'joomla_session.txt'))]
+		drupal_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'drupal_session.txt'))]
+		joomla_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'joomla_session.txt'))]
 		self.dvwa_session_id = ' '.join(dvwa_session_content)
 		self.wp15_session_id = ' '.join(wp15_session_content)
 		self.drupal_session_id = ' '.join(drupal_session_content)
