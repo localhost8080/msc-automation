@@ -43,7 +43,7 @@ class jonathans_scanner:
 		joomla_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'joomla_session.txt'))]
 		self.dvwa_session_id = ' '.join(dvwa_session_content)
 		self.wp15_session_id = ' '.join(wp15_session_content)
-		self.drupal_session_id = ' '.join(drupal_session_content)
+		#self.drupal_session_id = ' '.join(drupal_session_content)
 		self.joomla_session_id = ' '.join(joomla_session_content)
 		
 		self.logfile = ''
