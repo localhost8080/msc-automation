@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # simple bash script to get wordpress auth page using wget and save the cookie
 
