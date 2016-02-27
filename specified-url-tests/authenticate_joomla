@@ -2,16 +2,23 @@
 
 # simple bash script to get wordpress auth page using wget and save the cookie
 
-# login into the page and save the cookies
-postdata="username=admin&password=password"
+# get the login page to get the hidden field data
+wget --keep-session-cookies --save-cookies cookie.txt -O loginpage.html http://joomla.dev/
+# the actual user tolen is the 7th thing on this page
+user_token=`grep value < loginpage.html | grep user_token | tr '=' ' ' | awk '{print $7}' | sed s/\"//g | sed s/\'//g`
+return=`grep value < loginpage.html | grep user_token | tr '=' ' ' | awk '{print $7}' | sed s/\"//g | sed s/\'//g`
 
-wget -O /dev/null --keep-session-cookies --save-cookies joomla_cookie.txt --post-data ${postdata} http://wordpress1-5.dev/wp-login.php
+rm loginpage.html
+# login into the page and save the cookies
+postdata="Login=Login&username=admin&password=password&user_token=${user_token}"
+
+wget -O /dev/null --load-cookie cookie.txt --keep-session-cookies --save-cookies cookie.txt --post-data ${postdata} http://dvwa.dev/login.php
 
 #alter the first line
-sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' joomla_cookie.txt
+sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' cookie.txt
 # and the 5th word int he 5th line and the 5th word in the 6th line (wget cookie uses expiry time of 0, we need 9999999999 for w3af to work)
-# sed -i '5  s/0/999999999999/' cookie.txt
-# sed -i '6  s/0/999999999999/' cookie.txt
+sed -i '5  s/0/999999999999/' cookie.txt
+sed -i '6  s/0/999999999999/' cookie.txt
 #get a wapiti cookie
 
 expect -c "
