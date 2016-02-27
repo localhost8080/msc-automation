@@ -24,7 +24,7 @@ function login {
         --keep-session-cookies \
         --output-document=/dev/null \
         --post-data="name=${User}&pass=${Pass}/" \
-        "http://${Server}/"
+        "http://${Server}/node?destination=node"
 }
 
 login drupal.dev "admin" "password"
