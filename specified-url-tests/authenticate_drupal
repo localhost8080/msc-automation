@@ -2,28 +2,53 @@
 
 # simple bash script to get wordpress auth page using wget and save the cookie
 
-# login into the page and save the cookies
-postdata="name=admin&pass=password"
+# login script taken from http://stackoverflow.com/questions/2212557/curl-login-by-script-to-a-joomla-website
+function login {
+    Server=$1
+    User=$2
+    Pass=$3
+    Token=`wget \
+        --quiet \
+        --load-cookies drupal_cookie.txt \
+        --save-cookies drupal_cookie.txt \
+        --keep-session-cookies \
+        --output-document=- \
+        "http://${Server}/" | \
+    grep -Po '"[a-zA-z0-9]{32}"' | \
+    grep -o "[^'\"]*"`
 
-wget -O /dev/null --keep-session-cookies --save-cookies drupal_cookie.txt --post-data ${postdata} http://drupal.dev/
+    wget \
+        --quiet \
+        --load-cookies drupal_cookie.txt \
+        --save-cookies drupal_cookie.txt \
+        --keep-session-cookies \
+        --output-document=/dev/null \
+        --post-data="name=${User}&pass=${Pass}/" \
+        "http://${Server}/"
+}
+
+login joomla.dev "admin" "password"
+
 
 #alter the first line
 sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' drupal_cookie.txt
 # and the 5th word int he 5th line and the 5th word in the 6th line (wget cookie uses expiry time of 0, we need 9999999999 for w3af to work)
-# sed -i '5  s/0/999999999999/' cookie.txt
-# sed -i '6  s/0/999999999999/' cookie.txt
+sed -i '5  s/0/999999999999/' cookie.txt
+sed -i '6  s/0/999999999999/' cookie.txt
 #get a wapiti cookie
 
 expect -c "
    set timeout 1
    spawn wapiti-getcookie drupal_cookie.json http://drupal.dev
-   expect log
+   expect name
    send admin\r
-   expect pwd 
+   expect pass 
    send password\r
-   expect submit
+   expect form_build_id
    send \r
-   expect redirect_to
+   expect form_id
+   send \r
+   expect op
    send \r
    expect"
 
