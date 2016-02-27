@@ -3,7 +3,7 @@
 # simple bash script to get wordpress auth page using wget and save the cookie
 
 # login into the page and save the cookies
-postdata="log=admin&pwd=password"
+postdata="username=admin&password=password"
 
 wget -O /dev/null --keep-session-cookies --save-cookies joomla_cookie.txt --post-data ${postdata} http://wordpress1-5.dev/wp-login.php
 
@@ -16,14 +16,20 @@ sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' joomla_cookie.txt
 
 expect -c "
    set timeout 1
-   spawn wapiti-getcookie wordpress1-5cookie.json http://wordpress1-5.dev/wp-login.php
-   expect log
+   spawn wapiti-getcookie joomla_cookie.json http://joomla.dev/
+   expect username
    send admin\r
-   expect pwd 
+   expect password 
    send password\r
-   expect submit
+   expect remember
    send \r
-   expect redirect_to
+   expect option
+   send \r
+   expect task
+   send \r
+   expect return
+   send \r
+   expect ?
    send \r
    expect"
 

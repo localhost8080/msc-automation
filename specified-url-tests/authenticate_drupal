@@ -3,9 +3,9 @@
 # simple bash script to get wordpress auth page using wget and save the cookie
 
 # login into the page and save the cookies
-postdata="log=admin&pwd=password"
+postdata="name=admin&pass=password"
 
-wget -O /dev/null --keep-session-cookies --save-cookies drupal_cookie.txt --post-data ${postdata} http://wordpress1-5.dev/wp-login.php
+wget -O /dev/null --keep-session-cookies --save-cookies drupal_cookie.txt --post-data ${postdata} http://drupal.dev/
 
 #alter the first line
 sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' drupal_cookie.txt
@@ -16,7 +16,7 @@ sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' drupal_cookie.txt
 
 expect -c "
    set timeout 1
-   spawn wapiti-getcookie wordpress1-5cookie.json http://wordpress1-5.dev/wp-login.php
+   spawn wapiti-getcookie drupal_cookie.json http://drupal.dev
    expect log
    send admin\r
    expect pwd 

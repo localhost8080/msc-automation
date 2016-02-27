@@ -16,7 +16,7 @@ sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' wp15_cookie.txt
 
 expect -c "
    set timeout 1
-   spawn wapiti-getcookie wordpress1-5cookie.json http://wordpress1-5.dev/wp-login.php
+   spawn wapiti-getcookie wp15_cookie.json http://wordpress1-5.dev/wp-login.php
    expect log
    send admin\r
    expect pwd 
