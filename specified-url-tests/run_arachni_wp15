@@ -11,7 +11,7 @@ def main():
 		print url
 		scanner.setUrls(url)
 
-		cmd = ['/usr/bin/arachni', '--checks', 'sql_injection,no_sql_injection,sql_injection_timing,sql_injection_differential,no_sql_injection_differential', '--output-only-positives', '--report-save-path', scanner.reports + '_'+ fixed_base_url +'.afr', '--http-cookie-string', scanner.wp15_session_id, '--scope-page-limit','1', '"'+url+'"']
+		cmd = ['/usr/bin/arachni', '--checks', 'sql_injection,no_sql_injection,sql_injection_timing,sql_injection_differential,no_sql_injection_differential', '--output-only-positives', '--report-save-path', scanner.reports + '_'+ scanner.fixed_base_url +'.afr', '--http-cookie-string', scanner.wp15_session_id, '--scope-page-limit','1', '"'+url+'"']
 		cmd = ' '.join(cmd)
 
 		test = scanner.begin(cmd)
