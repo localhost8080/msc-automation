@@ -6,7 +6,6 @@ import signal
 import re
 from zapv2 import ZAPv2
 
-
 class jonathans_scanner:
 
 	def __init__(self, utility_name):	

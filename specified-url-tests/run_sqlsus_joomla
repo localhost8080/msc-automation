@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+from jonathans_scanner import jonathans_scanner
+
+def main():
+
+    name = 'sqlsus'
+
+    scanner = jonathans_scanner(name)
+
+    for url in scanner.dvwa_urls:
+        print url
+        scanner.setUrls(url)
+
+        #bbqsql takes input from a config file, we'll generate it here
+        with open('sqlsus.cfg', "w") as configfile:
+
+            print >> configfile,  "package conf\n"
+            print >> configfile,  "use strict \n"
+            print >> configfile,  "use warnings\n"
+
+            print >> configfile,  "our $url-start='"+url+"'\n"
+            print >> configfile,  "our $blind='1'\n"
+            print >> configfile,  "our $cookie='"+scanner.joomla_session_id + "'\n"
+            print >> configfile,  "our $proxy='http://127.0.0.1:8080\n"
+            print >> configfile,  "our $datapath='"+scanner.logfile+"'\n"
+            
+
+        cmd = ['/usr/bin/sqlsus', 'sqlsus.cfg']
+        cmd = ' '.join(cmd)
+
+        test = scanner.begin(cmd)
+
+if __name__ == '__main__':
+    main()
+
+
+
+
