@@ -22,7 +22,7 @@ def main():
             print >> configfile,  'our $blind="1";'
             print >> configfile,  'our $cookie="security=low; PHPSESSID='+scanner.dvwa_session_id + '";'
             print >> configfile,  'our $proxy="http://127.0.0.1:8080";'
-            print >> configfile,  'our $datapath="'+scanner.logfile+'";'
+            print >> configfile,  'our $datapath="'+scanner.logfile+'.log";'
             
 
         cmd = ['/usr/bin/sqlsus', 'sqlsus.cfg']
