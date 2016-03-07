@@ -18,11 +18,11 @@ def main():
             print >> configfile,  "use strict \n"
             print >> configfile,  "use warnings\n"
 
-            print >> configfile,  "our $url-start='"+url+"'\n"
-            print >> configfile,  "our $blind='1'\n"
-            print >> configfile,  "our $cookie='"+scanner.joomla_session_id + "'\n"
-            print >> configfile,  "our $proxy='http://127.0.0.1:8080\n"
-            print >> configfile,  "our $datapath='"+scanner.logfile+"'\n"
+            print >> configfile,  'our $url-start="'+url+'"'+"\n"
+            print >> configfile,  'our $blind="1"'+"\n"
+            print >> configfile,  'our $cookie="'+scanner.joomla_session_id + '"'+"\n"
+            print >> configfile,  'our $proxy="http://127.0.0.1:8080" '+"\n"
+            print >> configfile,  'our $datapath="'+scanner.logfile+'"'+"\n"
             
 
         cmd = ['/usr/bin/sqlsus', 'sqlsus.cfg']
