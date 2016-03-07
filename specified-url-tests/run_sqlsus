@@ -14,15 +14,15 @@ def main():
         #bbqsql takes input from a config file, we'll generate it here
         with open('sqlsus.cfg', "w") as configfile:
 
-            print >> configfile,  "package conf\n"
-            print >> configfile,  "use strict \n"
-            print >> configfile,  "use warnings\n"
+            print >> configfile,  "package conf;"
+            print >> configfile,  "use strict;"
+            print >> configfile,  "use warnings;"
 
-            print >> configfile,  'our $url_start="'+url+'"'+"\n"
-            print >> configfile,  'our $blind="1"'+"\n"
-            print >> configfile,  'our $cookie="security=low; PHPSESSID='+scanner.dvwa_session_id + '"'+"\n"
-            print >> configfile,  'our $proxy="http://127.0.0.1:8080"'+"\n"
-            print >> configfile,  'our $datapath="'+scanner.logfile+'"'+"\n"
+            print >> configfile,  'our $url_start="'+url+'";'
+            print >> configfile,  'our $blind="1";'
+            print >> configfile,  'our $cookie="security=low; PHPSESSID='+scanner.dvwa_session_id + '";'
+            print >> configfile,  'our $proxy="http://127.0.0.1:8080";'
+            print >> configfile,  'our $datapath="'+scanner.logfile+'";'
             
 
         cmd = ['/usr/bin/sqlsus', 'sqlsus.cfg']
