@@ -19,7 +19,7 @@ sed -i '5  s/0/999999999999/' cookie.txt
 sed -i '6  s/0/999999999999/' cookie.txt
 #get a wapiti cookie
 
-spawn wapiti-getcookie cookie.json http://dvwa.dev/login.php
+wapiti-getcookie cookie.json http://dvwa.dev/login.php
 
 #expect -c "
 #   set timeout 1

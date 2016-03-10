@@ -13,7 +13,7 @@ def main():
 		print url
 		scanner.setUrls(url)
 
-		cmd = ['/usr/bin/wapiti', '"'+scanner.url+'"', '-s', '"'+scanner.url+'"', '--scope', 'page', '-f', 'txt', '--cookie', scanner.dvwa_jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '-o', scanner.logfile + '.log', '--module', '"sql,blindsql"']
+		cmd = ['/usr/bin/wapiti', '"'+url+'"', '-s', '"'+url+'"', '--scope', 'page', '-f', 'txt', '--cookie', scanner.dvwa_jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '-o', scanner.logfile + '.log', '--module', '"sql,blindsql"']
 		cmd = ' '.join(cmd)
 		
 		test = scanner.begin(cmd)
