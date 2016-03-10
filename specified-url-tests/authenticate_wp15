@@ -14,18 +14,20 @@ sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' wp15_cookie.txt
 # sed -i '6  s/0/999999999999/' cookie.txt
 #get a wapiti cookie
 
-expect -c "
-   set timeout 1
-   spawn wapiti-getcookie wp15_cookie.json http://wordpress1-5.dev/wp-login.php
-   expect log
-   send admin\r
-   expect pwd 
-   send password\r
-   expect submit
-   send \r
-   expect redirect_to
-   send \r
-   expect"
+
+wapiti-getcookie wp15_cookie.json http://wordpress1-5.dev/wp-login.php
+#expect -c "
+#   set timeout 1
+#   spawn wapiti-getcookie wp15_cookie.json http://wordpress1-5.dev/wp-login.php
+#   expect log
+#   send admin\r
+#   expect pwd 
+#   send password\r
+#   expect submit
+#   send \r
+#   expect redirect_to
+#   send \r
+#   expect"
 
 
 #text file with just the session id in it
