@@ -14,7 +14,7 @@ def main():
 		print url
 		scanner.setUrls(url)
 		
-		cmd = ['/usr/bin/nikto', '-Format', 'txt', '-output', scanner.logfile, '-Plugins', '""', '-useproxy', 'http://127.0.0.1:8080/', '-Tuning', '9', '-host' , '"'+url+'"']
+		cmd = ['/usr/bin/nikto', '-Format', 'txt', '-output', scanner.logfile, '-Plugins', '""', '-useproxy', 'http://127.0.0.1:8080/', '-Tuning', '9', '-host' , '"'+scanner.base_url+'"']
 		cmd = ' '.join(cmd)
 
 		test = scanner.begin(cmd)
