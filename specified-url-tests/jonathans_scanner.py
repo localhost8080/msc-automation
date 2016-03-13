@@ -14,6 +14,7 @@ class jonathans_scanner:
 		self.reports = os.path.join(self.reports_path, self.ultilty_name)
 
 		#auth with them all for now
+		self.set_urls()
 		self.authenticate()
 		self.set_cookie()
 		
