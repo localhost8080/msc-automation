@@ -4,7 +4,6 @@ import os
 import subprocess
 import signal
 import re
-from zapv2 import ZAPv2
 
 class jonathans_scanner:
 
@@ -14,37 +13,11 @@ class jonathans_scanner:
 		self.reports_path = os.path.join(self.pwd, 'reports')
 		self.reports = os.path.join(self.reports_path, self.ultilty_name)
 		
-		# need these for dvwa
-		self.dvwa_cookiefile = os.path.join(self.pwd,'cookie.txt')
-		self.dvwa_jsoncookiefile = os.path.join(self.pwd,'cookie.json')
-		self.dvwa_urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'dvwa_urls.txt'))]
-
-		# need these for wordpress
-		self.wp15_cookiefile = os.path.join(self.pwd,'wp15_cookie.txt')
-		self.wp15_jsoncookiefile = os.path.join(self.pwd,'wp15_cookie.json')
-		self.wp15_urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'wp15_urls.txt'))]
-
-		# need these for drupal
-		#self.drupal_cookiefile = os.path.join(self.pwd,'drupal_cookie.txt')
-		#self.drupal_jsoncookiefile = os.path.join(self.pwd,'drupal_cookie.json')
-		self.drupal_urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'drupal_urls.txt'))]
-
-		# need these for joomla
-		self.joomla_cookiefile = os.path.join(self.pwd,'joomla_cookie.txt')
-		self.joomla_jsoncookiefile = os.path.join(self.pwd,'joomla_cookie.json')
-		self.joomla_urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'joomla_urls.txt'))]
-
+		#set the urls
+		self.set_urls()
 		#auth with them all for now
 		self.authenticated = self.authenticate()
-		dvwa_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'session.txt'))]
-		wp15_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'wp15_session.txt'))]
-		#drupal_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'drupal_session.txt'))]
-		joomla_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'joomla_session.txt'))]
-		self.dvwa_session_id = ' '.join(dvwa_session_content)
-		self.wp15_session_id = ' '.join(wp15_session_content)
-		#self.drupal_session_id = ' '.join(drupal_session_content)
-		self.joomla_session_id = ' '.join(joomla_session_content)
-		
+				
 		self.logfile = ''
 		self.base_url = ''
 		self.fixed_base_url = ''
@@ -60,18 +33,38 @@ class jonathans_scanner:
 		cleanup = subprocess.Popen(os.path.join(self.pwd,'cleanup'), shell=False)
 		cleanup.wait()
 		
-		authenticate = subprocess.Popen(os.path.join(self.pwd,'authenticate_dvwa'), shell=False)
+		run_auth('authenticate_dvwa')
+		run_auth('authenticate_wp15')
+		run_auth('authenticate_joomla')
+
+		dvwa_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'session.txt'))]
+		wp15_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'wp15_session.txt'))]
+		joomla_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'joomla_session.txt'))]
+		self.dvwa_session_id = ' '.join(dvwa_session_content)
+		self.wp15_session_id = ' '.join(wp15_session_content)
+		self.joomla_session_id = ' '.join(joomla_session_content)
+
+	def run_auth(self, platform):
+		authenticate = subprocess.Popen(os.path.join(self.pwd,platform), shell=False)
 		authenticate.wait()
 
-		authenticate = subprocess.Popen(os.path.join(self.pwd,'authenticate_wp15'), shell=False)
-		authenticate.wait()
+	def set_cookie(self, platform):
 
-		authenticate = subprocess.Popen(os.path.join(self.pwd,'authenticate_drupal'), shell=False)
-		authenticate.wait()
+	def set_urls(self):
+		# need these for dvwa
+		self.dvwa_cookiefile = os.path.join(self.pwd,'cookie.txt')
+		self.dvwa_jsoncookiefile = os.path.join(self.pwd,'cookie.json')
+		self.dvwa_urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'dvwa_urls.txt'))]
 
-		authenticate = subprocess.Popen(os.path.join(self.pwd,'authenticate_joomla'), shell=False)
-		authenticate.wait()
+		# need these for wordpress
+		self.wp15_cookiefile = os.path.join(self.pwd,'wp15_cookie.txt')
+		self.wp15_jsoncookiefile = os.path.join(self.pwd,'wp15_cookie.json')
+		self.wp15_urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'wp15_urls.txt'))]
 
+		# need these for joomla
+		self.joomla_cookiefile = os.path.join(self.pwd,'joomla_cookie.txt')
+		self.joomla_jsoncookiefile = os.path.join(self.pwd,'joomla_cookie.json')
+		self.joomla_urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'joomla_urls.txt'))]
 
 	def setUrls(self, url):
 		self.base_url = url[:url.find('?')]
