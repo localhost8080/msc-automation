@@ -12,12 +12,11 @@ class jonathans_scanner:
 		self.pwd = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))	
 		self.reports_path = os.path.join(self.pwd, 'reports')
 		self.reports = os.path.join(self.reports_path, self.ultilty_name)
-		
-		#set the urls
-		self.set_urls()
+
 		#auth with them all for now
-		self.authenticated = self.authenticate()
-				
+		self.authenticate()
+		self.set_cookie()
+		
 		self.logfile = ''
 		self.base_url = ''
 		self.fixed_base_url = ''
@@ -37,18 +36,17 @@ class jonathans_scanner:
 		run_auth('authenticate_wp15')
 		run_auth('authenticate_joomla')
 
+	def run_auth(self, platform):
+		authenticate = subprocess.Popen(os.path.join(self.pwd,platform), shell=False)
+		authenticate.wait()
+
+	def set_cookie(self):
 		dvwa_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'session.txt'))]
 		wp15_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'wp15_session.txt'))]
 		joomla_session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'joomla_session.txt'))]
 		self.dvwa_session_id = ' '.join(dvwa_session_content)
 		self.wp15_session_id = ' '.join(wp15_session_content)
 		self.joomla_session_id = ' '.join(joomla_session_content)
-
-	def run_auth(self, platform):
-		authenticate = subprocess.Popen(os.path.join(self.pwd,platform), shell=False)
-		authenticate.wait()
-
-	def set_cookie(self, platform):
 
 	def set_urls(self):
 		# need these for dvwa
