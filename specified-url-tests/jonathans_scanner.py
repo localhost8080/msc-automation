@@ -32,9 +32,9 @@ class jonathans_scanner:
 		cleanup = subprocess.Popen(os.path.join(self.pwd,'cleanup'), shell=False)
 		cleanup.wait()
 		
-		run_auth('authenticate_dvwa')
-		run_auth('authenticate_wp15')
-		run_auth('authenticate_joomla')
+		self.run_auth('authenticate_dvwa')
+		self.run_auth('authenticate_wp15')
+		self.run_auth('authenticate_joomla')
 
 	def run_auth(self, platform):
 		authenticate = subprocess.Popen(os.path.join(self.pwd,platform), shell=False)
