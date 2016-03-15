@@ -1,9 +1,6 @@
-,"0","","tb_id=1&url=bla&title=bla&blog_name=bla%20and%20union%20select%20*%20from%20no_table","GET","WordPress database error","","","404","","CVE-2005-1687",
-,"0","","cat=1%20and%20union%20select%20*%20from%20no_table","GET","WordPress database error","","","","","CVE-2005-1810",
-,"0","","<?xml version="1.0"?> <methodCall>   <methodName>wp.suggestCategories</methodName>   <params>     <param><value>1</value></param>     <param><value>{0}</value></param>     <param><value>{1}</value></param>     <param><value>1</value></param>     <par%20and%20union%20select%20*%20from%20no_table","GET","WordPress database error","","","","","CVE-2007-3140",
-,"0","","page_options=1%20and%20union%20select%20*%20from%20no_table","GET","WordPress database error","","","404","","CVE-2007-4154",
-,"0","","page_options=1%20and%20union%20select%20*%20from%20no_table","GET","WordPress database error","","","404","","CVE-2007-4154",
-,"0","","page_options=1%20and%20union%20select%20*%20from%20no_table","GET","WordPress database error","","","404","","CVE-2007-4154",
-,"0","","page_options=1%20and%20union%20select%20*%20from%20no_table","GET","WordPress database error","","","404","","CVE-2007-4154",
-,"0","","page_options=1%20and%20union%20select%20*%20from%20no_table","GET","WordPress database error","","","404","","CVE-2007-4154",
-,"0","","page_options=1%20and%20union%20select%20*%20from%20no_table","GET","WordPress database error","","","404","","CVE-2007-4154",
+Test-ID,OSVDB-ID,"Tuning Type",URI,"HTTP Method","Match 1","Match 1 Or","Match 1 And","Fail 1","Fail 2",Summary,"HTTP Data",Headers
+4000001,0,9,/wp-trackback.php,GET,"WordPress database error:",NULL,"You have an error in your SQL syntax",NULL,NULL,NULL,url=bla&title=bla&blog_name=bla&tb_id=a%27b%22c%27d%22,NULL
+4000002,0,9,/wp-admin/options.php,GET,"WordPress database error:",NULL,"You have an error in your SQL syntax",NULL,NULL,NULL,page_options=1&action=update,NULL
+4000003,0,9,/vulnerabilities/sqli/,GET,"You have an error in your SQL syntax",NULL,"near 'b""c'd""''",NULL,NULL,NULL,id=a%27b%22c%27d%22&Submit=Submit,NULL
+4000004,0,9,/vulnerabilities/sqli_blind/,GET,"User ID is MISSING from the database",NULL,NULL,NULL,NULL,NULL,"id=48' AND '48'='49&Submit=Submit",NULL
+4000005,0,9,/,GET,"The requested page can",NULL,"You have an error in your SQL syntax",NULL,NULL,NULL,"option=com_contenthistory&view=history&list[ordering]=&item_id=75&type_id=1&list[select]=a'b""c'd""",NULL
