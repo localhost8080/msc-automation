@@ -22,7 +22,7 @@ class jonathans_scanner:
 		self.set_url_list()
 
 		#authenticate
-		authenticator = jonathans_scanner_authenticator(platform_name)
+		authenticator = jonathans_scanner_authenticator(tool_name, platform_name)
 		#class properties form authenticaor with authenticated session information
 		self.session_id = authenticator.session_id
 		self.cookiefile = authenticator.cookiefile
