@@ -4,7 +4,7 @@ import os
 import subprocess
 import signal
 import re
-import jonathans_scanner_authenticator
+from jonathans_scanner_authenticator import jonathans_scanner_authenticator
 
 class jonathans_scanner:
 
@@ -12,30 +12,30 @@ class jonathans_scanner:
 		# set our tool name
 		self.tool_name = tool_name
 		self.platform_name = platform_name
+
+		#set misc paths
 		self.pwd = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))	
 		self.reports_path = os.path.join(self.pwd, 'reports')
 		self.reports = os.path.join(self.reports_path, self.tool_name)
 
 		#set the list of urls to scan
-		self.set_url_list(platform_name)
+		self.set_url_list()
 
 		#authenticate
 		authenticator = jonathans_scanner_authenticator(platform_name)
 		#class properties form authenticaor with authenticated session information
 		self.session_id = authenticator.session_id
 		self.cookiefile = authenticator.cookiefile
-		self.jsoncookiefile = jsoncookiefile
+		self.jsoncookiefile = authenticator.jsoncookiefile
 
 		#class properties for misc paths and urls
 		self.logfile = ''
 		self.base_url = ''
 		self.fixed_base_url = ''
 
-	def set_url_list(self, platform_name):
-		# set the url list name
-		url_file_name = platform_name+'_urls.txt'
-		self.urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd, url_file_name))]
-
+	def set_url_list(self):
+		# set the url list
+		self.urls = [line.rstrip('\n') for line in open(os.path.join(self.pwd, self.platform_name+'_urls.txt'))]
 
 	def set_misc_paths(self, url):
 		self.base_url = url[:url.find('?')]

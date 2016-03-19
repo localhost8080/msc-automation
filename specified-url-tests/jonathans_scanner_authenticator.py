@@ -14,25 +14,26 @@ class jonathans_scanner_authenticator:
 		self.session_id = ''
 		self.cookiefile = ''
 		self.jsoncookiefile = ''
+
+		#the platform we are testing
+		self.platform_name = platform_name
 		
 		#auth with platform
+		self.cleanup()
 		self.authenticate(platform_name)
 		self.set_cookie(platform_name)
 				
-	def authenticate(self, platform_name):
+	def cleanup(self):
 		# we cant cleanup after, due to the way python subprocess forks, so we will do a cleanup of any old files before
 		cleanup = subprocess.Popen(os.path.join(self.pwd,'cleanup'), shell=False)
 		cleanup.wait()
 
-		#call the actual authentication script
-		self.run_auth('authenticate_'+platform_name)
-
-	def run_auth(self, platform):
+	def authenticate(self):
 		# fork a subprocess and call a bash script that uses wget to request a cookie and keep its session ID
-		authenticator = subprocess.Popen(os.path.join(self.pwd,platform), shell=False)
+		authenticator = subprocess.Popen(os.path.join(self.pwd, 'authenticate_'+self.platform_name), shell=False)
 		authenticator.wait()
 
-	def set_cookie(self, platform_name):
+	def set_cookie(self):
 		# set our class properties that hold our actual cookie information to be used by our individual tools
 		session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'session.txt'))]
 		self.session_id = ' '.join(session_content)
