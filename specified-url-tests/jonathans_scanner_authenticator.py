@@ -20,8 +20,8 @@ class jonathans_scanner_authenticator:
 		
 		#auth with platform
 		self.cleanup()
-		self.authenticate(platform_name)
-		self.set_cookie(platform_name)
+		self.authenticate()
+		self.set_cookie()
 				
 	def cleanup(self):
 		# we cant cleanup after, due to the way python subprocess forks, so we will do a cleanup of any old files before
