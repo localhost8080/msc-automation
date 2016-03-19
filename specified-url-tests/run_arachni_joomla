@@ -1,17 +1,19 @@
 #!/usr/bin/env python
 from jonathans_scanner import jonathans_scanner
+import re
 
 def main():
 
 	name = 'arachni'
+	platform = 'joomla'
 
-	scanner = jonathans_scanner(name)
+	scanner = jonathans_scanner(name, platform)
 
-	for url in scanner.joomla_urls:
+	for url in scanner.urls:
 		print url
-		scanner.setUrls(url)
+		scanner.set_misc_paths(url)
 
-		cmd = ['/usr/bin/arachni', '--checks', 'sql_injection,no_sql_injection,sql_injection_timing,sql_injection_differential,no_sql_injection_differential', '--output-only-positives', '--report-save-path', scanner.reports + '_'+ scanner.fixed_base_url +'.afr' + '.afr', '--http-cookie-string', scanner.joomla_session_id, '--scope-page-limit','1', '"'+url+'"']
+		cmd = ['/usr/bin/arachni', '--checks', 'sql_injection,no_sql_injection,sql_injection_timing,sql_injection_differential,no_sql_injection_differential', '--output-only-positives', '--report-save-path', scanner.reports + '_'+ scanner.fixed_base_url +'.afr', '--http-cookie-string', '"security=low; PHPSESSID='+scanner.session_id + '"', '--scope-page-limit','1', '"'+url+'"']
 		cmd = ' '.join(cmd)
 
 		test = scanner.begin(cmd)

@@ -4,12 +4,13 @@ from jonathans_scanner import jonathans_scanner
 def main():
 
     name = 'w3af'
+    platform = 'joomla'
 
-    scanner = jonathans_scanner(name)
+    scanner = jonathans_scanner(name, platform)
 
-    for url in scanner.joomla_urls:
+    for url in scanner.urls:
         print url
-        scanner.setUrls(url)
+        scanner.set_misc_paths(url)
 
         #bbqsql takes input from a config file, we'll generate it here
         with open('w3af.script', "w") as configfile:
@@ -19,7 +20,7 @@ def main():
             print >> configfile,  "back\n"
 
             print >> configfile,  "http-settings\n"
-            print >> configfile,  "set cookie_jar_file "+scanner.joomla_cookiefile+"\n"
+            print >> configfile,  "set cookie_jar_file "+scanner.cookiefile+"\n"
             print >> configfile,  "set proxy_address 127.0.0.1\n"
             print >> configfile,  "set proxy_port 8080\n"
             print >> configfile,  "back\n"
@@ -56,4 +57,9 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+
+
+
 

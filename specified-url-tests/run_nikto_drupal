@@ -7,20 +7,15 @@ import subprocess
 def main():
 
 	name = 'nikto'
+	platform = 'drupal'
 
-	scanner = jonathans_scanner(name)
+	scanner = jonathans_scanner(name, platform)
 
-	cmd = ['rm', os.path.join(scanner.pwd, 'nikto.conf'), '&&', 'mv', os.path.join(scanner.pwd, 'drupal_nikto.conf'), os.path.join(scanner.pwd,'nikto.conf')]
-	cmd = ' '.join(cmd)
-	print cmd
-
-	authenticate = subprocess.Popen(cmd, shell=True)
-
-	for url in scanner.drupal_urls:
+	for url in scanner.urls:
 		print url
-		scanner.setUrls(url)
+		scanner.set_misc_paths(url)
 		
-		cmd = ['/usr/bin/nikto', '-Format', 'txt', '-output', scanner.logfile, '-Plugins', '""', '-useproxy', 'http://127.0.0.1:8080/', '-Tuning', '9', '-host' ,'"'+scanner.base_url+'"']
+		cmd = ['/usr/bin/nikto', '-Format', 'txt', '-output', scanner.logfile, '-Plugins', '""', '-useproxy', 'http://127.0.0.1:8080/', '-Tuning', '9', '-host' , '"'+scanner.base_url+'"']
 		cmd = ' '.join(cmd)
 
 		test = scanner.begin(cmd)

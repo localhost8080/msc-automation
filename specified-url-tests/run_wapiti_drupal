@@ -6,14 +6,15 @@ import re
 def main():
 
 	name = 'wapiti'
+	platform = 'drupal'
 
 	scanner = jonathans_scanner(name)
 
-	for url in scanner.drupal_urls:
+	for url in scanner.urls:
 		print url
-		scanner.setUrls(url)
+		scanner.set_misc_paths(url)
 
-		cmd = ['/usr/bin/wapiti', '"'+url+'"', '-s', '"'+url+'"', '--scope', 'page', '-f', 'txt', '--cookie', scanner.drupal_jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '-o', scanner.logfile + '.log', '--module', '"sql,blindsql"']
+		cmd = ['/usr/bin/wapiti', '"'+url+'"', '-s', '"'+url+'"', '--scope', 'page', '-f', 'txt', '--cookie', scanner.jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '-o', scanner.logfile + '.log', '--module', '"sql,blindsql"']
 		cmd = ' '.join(cmd)
 		
 		test = scanner.begin(cmd)

@@ -9,8 +9,8 @@ function login {
     Pass=$3
     Token=`wget \
         --quiet \
-        --load-cookies joomla_cookie.txt \
-        --save-cookies joomla_cookie.txt \
+        --load-cookies cookie.txt \
+        --save-cookies cookie.txt \
         --keep-session-cookies \
         --output-document=- \
         "http://${Server}/administrator" | \
@@ -19,8 +19,8 @@ function login {
 
     wget \
         --quiet \
-        --load-cookies joomla_cookie.txt \
-        --save-cookies joomla_cookie.txt \
+        --load-cookies cookie.txt \
+        --save-cookies cookie.txt \
         --keep-session-cookies \
         --output-document=/dev/null \
         --post-data="username=${User}&passwd=${Pass}&option=com_login&task=login&${Token}=1" \
@@ -30,15 +30,15 @@ function login {
 login joomla.dev "admin" "password"
 
 #alter the first line
-sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' joomla_cookie.txt
+sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' cookie.txt
 # and the 5th word int he 5th line and the 5th word in the 6th line (wget cookie uses expiry time of 0, we need 9999999999 for w3af to work)
-sed -i '5  s/0/999999999999/' joomla_cookie.txt
-sed -i '6  s/0/999999999999/' joomla_cookie.txt
+sed -i '5  s/0/999999999999/' cookie.txt
+sed -i '6  s/0/999999999999/' cookie.txt
 #get a wapiti cookie
 
 expect -c "
    set timeout 1
-   spawn wapiti-getcookie joomla_cookie.json http://joomla.dev/
+   spawn wapiti-getcookie cookie.json http://joomla.dev/
    expect username
    send admin\r
    expect password 
@@ -57,12 +57,12 @@ expect -c "
 
 
 #text file with just the session id in it
-session_id=`grep joomla.dev < joomla_cookie.txt | awk '{print $7}'`
-session_name=`grep joomla.dev < joomla_cookie.txt | awk '{print $6}'`
-echo -n '"'$session_name'='$session_id';"' > joomla_session.txt
+session_id=`grep joomla.dev < cookie.txt | awk '{print $7}'`
+session_name=`grep joomla.dev < cookie.txt | awk '{print $6}'`
+echo -n '"'$session_name'='$session_id';"' > session.txt
 
 
 #nikto cookie
 #make a nikto config with this cookie info in it and some other nikto options
-echo -n 'STATIC-COOKIE="'$session_name'"="'$session_id'"' > joomla_nikto.conf
+echo -n 'STATIC-COOKIE="'$session_name'"="'$session_id'"' > nikto.conf
 

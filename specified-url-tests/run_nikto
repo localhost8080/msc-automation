@@ -7,12 +7,13 @@ import subprocess
 def main():
 
 	name = 'nikto'
+	platform = 'dvwa'
 
-	scanner = jonathans_scanner(name)
+	scanner = jonathans_scanner(name, platform)
 
-	for url in scanner.dvwa_urls:
+	for url in scanner.urls:
 		print url
-		scanner.setUrls(url)
+		scanner.set_misc_paths(url)
 		
 		cmd = ['/usr/bin/nikto', '-Format', 'txt', '-output', scanner.logfile, '-Plugins', '""', '-useproxy', 'http://127.0.0.1:8080/', '-Tuning', '9', '-host' , '"'+scanner.base_url+'"']
 		cmd = ' '.join(cmd)

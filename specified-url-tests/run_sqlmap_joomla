@@ -6,14 +6,15 @@ import re
 def main():
 
 	name = 'sqlmap'
+	platform = 'joomla'
 
-	scanner = jonathans_scanner(name)
+	scanner = jonathans_scanner(name, platform)
 
-	for url in scanner.joomla_urls:
+	for url in scanner.urls:
 		print url
-		scanner.setUrls(url)
+		scanner.set_misc_paths(url)
 		
-		cmd = ['/usr/bin/sqlmap', '--output-dir', scanner.reports, '--dbms=MySQL', '--proxy="http://127.0.0.1:8080"', '--random-agent', '--threads=1', '--level=3', '--risk=3', '--batch', '--cookie='+ scanner.joomla_session_id, '-u', '"'+url+'"',]
+		cmd = ['/usr/bin/sqlmap', '--output-dir', scanner.reports, '--dbms=MySQL', '--proxy="http://127.0.0.1:8080"', '--random-agent', '--threads=1', '--level=3', '--risk=3', '--batch', '--cookie="security=low; PHPSESSID='+ scanner.session_id +'"', '-u', '"'+url+'"',]
 		cmd = ' '.join(cmd)
 
 		test = scanner.begin(cmd)

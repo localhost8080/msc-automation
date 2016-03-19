@@ -2,23 +2,7 @@
 #cleanup file
 rm cookie.txt
 rm cookie.json
-rm nikto.conf
 rm session.txt
 
-rm wp15_nikto.conf
-rm wp15_cookie.txt
-rm wp15_cookie.json
-rm wp15_session.txt
-
-rm joomla_nikto.conf
-rm joomla_cookie.txt
-rm joomla_cookie.json
-rm joomla_session.txt
-
-rm drupal_nikto.conf
-rm drupal_cookie.txt
-rm drupal_cookie.json
-rm drupal_session.txt
-
+rm nikto.conf
 rm w3af.script
-rm bbqsql.conf
