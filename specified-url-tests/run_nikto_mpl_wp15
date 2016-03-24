@@ -15,7 +15,7 @@ def main():
 		print url
 		scanner.set_misc_paths(url)
 		
-		cmd = ['/usr/bin/nikto', '-Format', 'txt', '-output', scanner.logfile, '-Plugins', '""', '-useproxy', 'http://127.0.0.1:8080/', '-Tuning', '9', '-host' , '"'+scanner.base_url+'"']
+		cmd = ['/usr/bin/nikto', '-Format', 'txt', '-Userdbs', 'all', '-output', scanner.logfile, '-Plugins', '"sql_injector"', '-useproxy', 'http://127.0.0.1:8080/', '-Tuning', '9', '-host' , '"'+scanner.base_url+'"']
 		cmd = ' '.join(cmd)
 
 		test = scanner.begin(cmd)
