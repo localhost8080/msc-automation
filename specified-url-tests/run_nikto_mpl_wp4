@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+from jonathans_scanner import jonathans_scanner
+import sys
+import os
+import subprocess
+
+def main():
+
+	name = 'nikto_mpl'
+	platform = 'wp4'
+
+	scanner = jonathans_scanner(name, platform)
+
+	for url in scanner.urls:
+		print url
+		scanner.set_misc_paths(url)
+		
+		cmd = ['/usr/bin/nikto', '-Format', 'txt', '-Userdbs', 'all', '-output', scanner.logfile, '-Plugins', '"sql_injector(url:'+url+')"', '-useproxy', 'http://127.0.0.1:8080/', '-Tuning', '9', '-host' , '"'+scanner.base_url+'"']
+		cmd = ' '.join(cmd)
+
+		test = scanner.begin(cmd)
+
+if __name__ == '__main__':
+	main()

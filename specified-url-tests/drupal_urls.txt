@@ -1,1 +1,1 @@
-http://drupal.dev
+http://drupal.dev/?name[0]=test3&name[0]=test&pass=test&test2=test&form_build_id=&form_id=user_login_block&op=Log+in

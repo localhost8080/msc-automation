@@ -12,3 +12,4 @@ http://wordpress1-5.dev/wp-admin/options-permalink.php?page_options=1
 http://wordpress1-5.dev/wp-admin/options-misc.php?page_options=1
 http://dvwa.dev/vulnerabilities/sqli/?id=1&Submit=Submit
 http://dvwa.dev/vulnerabilities/sqli_blind/?id=1&Submit=Submit
+http://wordpress4.dev/wp-admin/admin.php?page=wpseo_bulk-editor&type=title&orderby=post_date&order=asc

@@ -5,18 +5,11 @@
 ##############
 # arachni
 ##############
-#./run_arachni
-#./run_arachni_wp15
-#./run_arachni_drupal
-#./run_arachni_joomla
+./run_arachni
+./run_arachni_wp15
+./run_arachni_drupal
+./run_arachni_joomla
 
-##############
-# bbqsql
-##############
-#./run_bbqsql
-#./run_bbqsql_wp15
-#./run_bbqsql_drupal
-#./run_bbqsql_joomla
 
 ##############
 # nikto
@@ -27,14 +20,6 @@
 ./run_nikto_joomla
 
 ##############
-# openvas
-##############
-#./run_openvas
-#./run_openvas_wp15
-#./run_openvas_drupal
-#./run_openvas_joomla
-
-##############
 # sqlmap
 ##############
 ./run_sqlmap
@@ -42,22 +27,6 @@
 ./run_sqlmap_drupal
 ./run_sqlmap_joomla
 ./run_sqlmap_wordpress
-
-##############
-# the mole
-##############
-#./run_the_mole
-#./run_the_mole_wp15
-#./run_the_mole_drupal
-#./run_the_mole_joomla
-
-##############
-# vega
-##############
-#./run_vega
-#./run_vega_wp15
-#./run_vega_drupal
-#./run_vega_joomla
 
 ##############
 # w3af
@@ -74,3 +43,29 @@
 ./run_wapiti_wp15
 ./run_wapiti_drupal
 ./run_wapiti_joomla
+
+##############
+# openvas
+##############
+# manual
+
+##############
+# ironwasp
+##############
+# manual
+
+##############
+# openvas
+##############
+# manual
+
+##############
+# vega
+##############
+# manual
+
+##############
+# zap
+##############
+# manual
+

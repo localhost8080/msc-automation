@@ -1,0 +1,1 @@
+http://wordpress4.dev/wp-admin/admin.php?page=wpseo_bulk-editor&type=title&orderby=post_date&order=asc
