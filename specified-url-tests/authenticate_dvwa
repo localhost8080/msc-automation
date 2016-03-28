@@ -21,19 +21,6 @@ sed -i '6  s/0/999999999999/' cookie.txt
 
 wapiti-getcookie cookie.json http://dvwa.dev/login.php
 
-#expect -c "
-#   set timeout 1
-#   spawn wapiti-getcookie cookie.json http://dvwa.dev/login.php
-#   expect username
-#   send admin\r
-#   expect assword 
-#   send password\r
-#   expect Login 
-#   send \r
-#   expect user_token 
-#   send \r
-#   expect"
-
 sed -i '5  s/null/999999999999/' cookie.json
 sed -i '13  s/null/999999999999/' cookie.json
 
@@ -41,7 +28,6 @@ sed -i '13  s/null/999999999999/' cookie.json
 session_id=`grep PHPSESSID < cookie.txt | awk '{print $7}'`
 echo -n $session_id > session.txt
 
-#nikto cookie
 #make a nikto config with this cookie info in it and some other nikto options
 echo -n 'STATIC-COOKIE="security"="low";"PHPSESSID"="'$session_id'"' > nikto.conf
 

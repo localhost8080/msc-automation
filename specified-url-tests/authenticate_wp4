@@ -5,13 +5,13 @@
 # login into the page and save the cookies using wget
 postdata="log=admin&pwd=password"
 
-wget -O /dev/null --keep-session-cookies --save-cookies cookie.txt --post-data ${postdata} http://wordpress1-5.dev/wp-login.php
+wget -O /dev/null --keep-session-cookies --save-cookies cookie.txt --post-data ${postdata} http://wordpress4.dev/wp-login.php
 
 #alter the first line so that its compatible with the scanner tools
 sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' cookie.txt
 
 #get a wapiti cookie
-wapiti-getcookie cookie.json http://wordpress1-5.dev/wp-login.php
+wapiti-getcookie cookie.json http://wordpress4.dev/wp-login.php
 
 #create a text file with just the session id in it
 session_id=`grep wordpresspass < cookie.txt | awk '{print $7}'`
