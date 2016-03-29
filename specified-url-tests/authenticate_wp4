@@ -5,7 +5,8 @@
 # login into the page and save the cookies using wget
 postdata="log=admin&pwd=password&testcookie=1&redirect_to=/wp-admin/"
 
-wget -O /dev/null --keep-session-cookies --save-cookies cookie.txt --post-data ${postdata} http://wordpress4.dev/wp-login.php
+wget -O /dev/null --keep-session-cookies --save-cookies cookie.txt http://wordpress4.dev/wp-login.php
+wget -O /dev/null --load-session-cookies cookie.txt --keep-session-cookies --save-cookies cookie.txt --post-data ${postdata} http://wordpress4.dev/wp-login.php
 wget -O /dev/null --load-session-cookies cookie.txt --keep-session-cookies --save-cookies cookie.txt http://wordpress4.dev/wp-admin
 
 
