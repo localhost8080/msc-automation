@@ -5,9 +5,11 @@
 # login into the page and save the cookies using wget
 postdata="log=admin&pwd=password&testcookie=1&wp-submit=Log+In&redirect_to=http://wordpress4.dev/wp-admin/"
 
-wget -O /dev/null --keep-session-cookies --save-cookies cookie.txt http://wordpress4.dev/wp-login.php
-wget -O /dev/null --keep-session-cookies --save-cookies cookie.txt --load-cookies cookie.txt --post-data ${postdata} http://wordpress4.dev/wp-login.php
-wget -O /dev/null --keep-session-cookies --save-cookies cookie.txt --load-cookies cookie.txt http://wordpress4.dev/wp-admin
+#wget -O /dev/null --keep-session-cookies --save-cookies cookie.txt http://wordpress4.dev/wp-login.php
+#wget -O /dev/null --keep-session-cookies --save-cookies cookie.txt --load-cookies cookie.txt --post-data ${postdata} http://wordpress4.dev/wp-login.php
+#wget -O /dev/null --keep-session-cookies --save-cookies cookie.txt --load-cookies cookie.txt http://wordpress4.dev/wp-admin
+
+curl -c cookie.txt -d "${postdata}" http://wordpress4.dev/wp-login.php
 
 
 #alter the first line so that its compatible with the scanner tools
