@@ -6,6 +6,8 @@
 postdata="log=admin&pwd=password&testcookie=1&redirect_to=/wp-admin/"
 
 wget -O /dev/null --keep-session-cookies --save-cookies cookie.txt --post-data ${postdata} http://wordpress4.dev/wp-login.php
+wget -O /dev/null --load-session-cookies cookie.txt --keep-session-cookies --save-cookies cookie.txt http://wordpress4.dev/wp-admin
+
 
 #alter the first line so that its compatible with the scanner tools
 sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' cookie.txt
