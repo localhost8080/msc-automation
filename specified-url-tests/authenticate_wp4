@@ -5,12 +5,7 @@
 # login into the page and save the cookies using wget
 postdata="log=admin&pwd=password&testcookie=1&wp-submit=Log+In&redirect_to=http://wordpress4.dev/wp-admin/"
 
-#wget -O /dev/null --keep-session-cookies --save-cookies cookie.txt http://wordpress4.dev/wp-login.php
-#wget -O /dev/null --keep-session-cookies --save-cookies cookie.txt --load-cookies cookie.txt --post-data ${postdata} http://wordpress4.dev/wp-login.php
-#wget -O /dev/null --keep-session-cookies --save-cookies cookie.txt --load-cookies cookie.txt http://wordpress4.dev/wp-admin
-
 curl -c cookie.txt -d "${postdata}" http://wordpress4.dev/wp-login.php
-
 
 #alter the first line so that its compatible with the scanner tools
 sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' cookie.txt
@@ -21,9 +16,17 @@ wapiti-getcookie cookie.json http://wordpress4.dev/wp-login.php
 #create a text file with just the session id in it
 session_id=`grep wordpress_logged_in < cookie.txt | awk '{print $7}'`
 session_name=`grep wordpress_logged_in < cookie.txt | awk '{print $6}'`
-#session_id2=`grep test_cookie < cookie.txt | awk '{print $7}'`
-#session_name2=`grep test_cookie < cookie.txt | awk '{print $6}'`
-echo -n "$session_name=$session_id;path=/wp-admin/" > session.txt
+
+session_id2=`grep wp-admin < cookie.txt | awk '{print $7}'`
+session_name2=`grep wp-admin < cookie.txt | awk '{print $6}'`
+
+session_id3=`grep plugins < cookie.txt | awk '{print $7}'`
+session_name3=`grep plugins < cookie.txt | awk '{print $6}'`
+
+session_id4=`grep test_cookie < cookie.txt | awk '{print $7}'`
+session_name4=`grep test_cookie < cookie.txt | awk '{print $6}'`
+
+echo -n "$session_name=$session_id;$session_name2=$session_id2;$session_name3=$session_id3;$session_name4=$session_id4;" > session.txt
 
 #make a nikto config with this cookie info in it and some other nikto options
-echo -n 'STATIC-COOKIE="'$session_name'='$session_id'"' > nikto.conf
+echo -n 'STATIC-COOKIE="'$session_name'='$session_id';'$session_name2'='$session_id2';'$session_name3'='$session_id3';'$session_name4'='$session_id4';"' > nikto.conf
