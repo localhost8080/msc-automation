@@ -8,7 +8,7 @@ def main():
 	name = 'wapiti'
 	platform = 'drupal'
 
-	scanner = jonathans_scanner(name)
+	scanner = jonathans_scanner(name, platform)
 
 	for url in scanner.urls:
 		print url
