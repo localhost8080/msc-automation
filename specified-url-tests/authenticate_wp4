@@ -18,7 +18,7 @@ session_id=`grep wordpress_logged_in < cookie.txt | awk '{print $7}'`
 session_name=`grep wordpress_logged_in < cookie.txt | awk '{print $6}'`
 #session_id2=`grep test_cookie < cookie.txt | awk '{print $7}'`
 #session_name2=`grep test_cookie < cookie.txt | awk '{print $6}'`
-echo -n '"'$session_name'='$session_id';"' > session.txt
+echo -n "'"$session_name"="$session_id"';' > session.txt
 
 #make a nikto config with this cookie info in it and some other nikto options
 echo -n 'STATIC-COOKIE="'$session_name2'"="'$session_id2'";"'$session_name'"="'$session_id'"' > nikto.conf
