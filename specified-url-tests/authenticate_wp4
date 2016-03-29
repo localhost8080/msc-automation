@@ -2,10 +2,14 @@
 
 # simple bash script to get wordpress auth page using wget and save the cookie
 
+
+# get the login page to get the hidden field data
+wget --keep-session-cookies --save-cookies cookie.txt -O loginpage.html http://wordpress4.dev/wp-login.php
+
 # login into the page and save the cookies using wget
 postdata="log=admin&pwd=password&testcookie=1&redirect_to=/wp-admin/"
 
-wget -O /dev/null --keep-session-cookies --save-cookies cookie.txt --post-data ${postdata} http://wordpress4.dev/wp-login.php
+wget -O /dev/null --load-cookie cookie.txt --keep-session-cookies --save-cookies cookie.txt --post-data ${postdata} http://wordpress4.dev/wp-login.php
 
 #alter the first line so that its compatible with the scanner tools
 sed -i '1 s/^.*$/# Netscape HTTP Cookie File/g' cookie.txt
@@ -18,7 +22,7 @@ session_id=`grep wordpress_logged_in < cookie.txt | awk '{print $7}'`
 session_name=`grep wordpress_logged_in < cookie.txt | awk '{print $6}'`
 #session_id2=`grep test_cookie < cookie.txt | awk '{print $7}'`
 #session_name2=`grep test_cookie < cookie.txt | awk '{print $6}'`
-echo -n "$session_name=$session_id;" > session.txt
+echo -n "$session_name=$session_id;path=/wp-admin" > session.txt
 
 #make a nikto config with this cookie info in it and some other nikto options
 echo -n 'STATIC-COOKIE="'$session_name'='$session_id'"' > nikto.conf
