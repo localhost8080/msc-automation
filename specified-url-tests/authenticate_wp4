@@ -26,7 +26,7 @@ session_name3=`grep plugins < cookie.txt | awk '{print $6}'`
 session_id4=`grep test_cookie < cookie.txt | awk '{print $7}'`
 session_name4=`grep test_cookie < cookie.txt | awk '{print $6}'`
 
-echo -n "$session_name=$session_id;$session_name2=$session_id2;$session_name3=$session_id3;$session_name4=$session_id4;" > session.txt
+echo -n '"'$session_name'"="'$session_id'";"'$session_name2'"="'$session_id2'";"'$session_name3'"="'$session_id3'";"'$session_name4'"="'$session_id4'";' > session.txt
 
 #make a nikto config with this cookie info in it and some other nikto options
-echo -n 'STATIC-COOKIE="'$session_name'='$session_id';'$session_name2'='$session_id2';'$session_name3'='$session_id3';'$session_name4'='$session_id4';"' > nikto.conf
+echo -n 'STATIC-COOKIE="'$session_name'"="'$session_id'";"'$session_name2'"="'$session_id2'";"'$session_name3'"="'$session_id3'";"'$session_name4'"="'$session_id4'";' > nikto.conf
