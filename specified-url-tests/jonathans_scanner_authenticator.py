@@ -36,16 +36,16 @@ class jonathans_scanner_authenticator:
 	def set_cookie(self):
 		# set our class properties that hold our actual cookie information to be used by our individual tools
 		self.session_id = ''
-		session_file = os.path.join(self.pwd,'session.txt')
-		if self.is_non_zero_file(session_file):
-			session_content = [line.rstrip('\n') for line in open(session_file)]
+
+		if self.is_non_zero_file(os.path.join(self.pwd,'session.txt')):
+			session_content = [line.rstrip('\n') for line in open(os.path.join(self.pwd,'session.txt'))]
 			self.session_id = ' '.join(session_content)
 		
 		# set some class properties to be used with actual cookie files
 		self.cookiefile = os.path.join(self.pwd,'cookie.txt')
 		self.jsoncookiefile = os.path.join(self.pwd,'cookie.json')
 
-	def is_non_zero_file(fpath):  
+	def is_non_zero_file(self, fpath):  
 		return True if os.path.isfile(fpath) and os.path.getsize(fpath) > 0 else False
 		
 
