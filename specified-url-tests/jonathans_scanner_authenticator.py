@@ -46,7 +46,7 @@ class jonathans_scanner_authenticator:
 		self.jsoncookiefile = os.path.join(self.pwd,'cookie.json')
 
 	def is_non_zero_file(fpath):  
-    	return True if os.path.isfile(fpath) and os.path.getsize(fpath) > 0 else False
+		return True if os.path.isfile(fpath) and os.path.getsize(fpath) > 0 else False
 		
 
 
