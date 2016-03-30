@@ -14,7 +14,7 @@ def main():
 		print url
 		scanner.set_misc_paths(url)
 
-		cmd = ['/usr/bin/wapiti', '"'+url+'"', '-s', '"'+url+'"', '--scope', 'page', '-f', 'txt', '--cookie', scanner.jsoncookiefile, '--proxy', 'http://127.0.0.1:8080', '-o', scanner.logfile + '.log', '--module', '"sql,blindsql"']
+		cmd = ['/usr/bin/wapiti', '"'+url+'"', '-s', '"'+url+'"', '--scope', 'page', '-f', 'txt', '--proxy', 'http://127.0.0.1:8080', '-o', scanner.logfile + '.log', '--module', '"sql,blindsql"']
 		cmd = ' '.join(cmd)
 		
 		test = scanner.begin(cmd)
