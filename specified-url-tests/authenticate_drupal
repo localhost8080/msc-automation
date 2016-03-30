@@ -1,2 +1,3 @@
 #!/bin/bash
-# our drupal vulnerability doesnt need auth
+# our drupal vulnerability doesnt need auth, but we need a cookie
+curl -c cookie.txt http://drupal.dev
